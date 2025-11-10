@@ -2,7 +2,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
@@ -45,7 +46,7 @@ export class DataService {
   }
 
   errorHandler(error: HttpErrorResponse){
-    return Observable.throw(error.message || "Server Error");
+    return throwError(() => error.message || "Server Error");
   }
 
 
@@ -69,7 +70,8 @@ export class DataService {
   
   getWarehouseList(data:any)
   {
-    return this.http.post(this.baseUrl + 'getCustomerSites/',data,  this.getAuthHeaders()).catch(this.errorHandler);
+    return this.http.post(this.baseUrl + 'getCustomerSites/',data,  this.getAuthHeaders())
+      .pipe(catchError(err => this.errorHandler(err)));
   }
 
   getSiteInfo(data: any) {

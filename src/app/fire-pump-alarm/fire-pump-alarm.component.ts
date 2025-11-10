@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable, interval } from 'rxjs';
 import { DataRowOutlet } from '@angular/cdk/table';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatSort} from '@angular/material';
 import {MatTable} from '@angular/material/table';
 import { AfterViewInit,  ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { DataTableItem, DataTableDataSource } from '../super-admin/data-table-datasource';
-import { filter } from 'rxjs-compat/operator/filter';
+import { filter } from 'rxjs/operators';
 import { DataService } from './../services/data.service';
 
 export interface EmailData {
@@ -74,9 +74,9 @@ export class FirePumpAlarmComponent implements OnInit {
   }
 
    ngAfterViewInit() {
-     Observable.interval(5000).subscribe(
-         response => { this.getFireAlarmData(); }
-     );
+     interval(5000).subscribe(
+           () => { this.getFireAlarmData(); }
+       );
    }
 
    customerPage(){

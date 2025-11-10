@@ -274,7 +274,7 @@
 }
 
 
-*  breadcrump */
+/*  breadcrump */
 
 .btn-breadcrumb .btn:not(:last-child):after {
    content: " ";

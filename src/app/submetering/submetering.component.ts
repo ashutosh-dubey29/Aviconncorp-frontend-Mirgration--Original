@@ -10,7 +10,7 @@ import {MatPaginator, MatTableDataSource, MatTable} from '@angular/material';
 import * as Highcharts from 'highcharts';
 import {MatSort} from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 import {formatDate, getLocaleDayNames} from '@angular/common';
 import { SiteDetailsModel, LiveMeteringDataModel } from './../models/siteDataModel';

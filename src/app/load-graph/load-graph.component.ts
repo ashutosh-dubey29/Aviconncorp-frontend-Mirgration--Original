@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { data } from 'jquery';
 import { DataService } from '../services/data.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 
 @Component({

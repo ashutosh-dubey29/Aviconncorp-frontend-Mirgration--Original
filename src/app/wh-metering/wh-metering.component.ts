@@ -14,8 +14,7 @@ import * as Highcharts from 'highcharts';
 //import {MatPaginator} from '@angular/material';
 // import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
-import { from } from 'rxjs';
+import { Observable, interval, from } from 'rxjs';
 import { formatDate, getLocaleDayNames } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
@@ -28,7 +27,7 @@ import { PfTableComponent } from '../pf-table/pf-table.component';
 import { LoadDataTableComponent } from '../load-data-table/load-data-table.component';
 import { CustomDateRangePickerComponent } from '../custom-date-range-picker/custom-date-range-picker.component';
 import { DgFuelExcelExportComponent } from '../dg-fuel-excel-export/dg-fuel-excel-export.component';
-import { data } from 'jquery';
+// removed incorrect import from 'jquery' (was shadowing local variables)
 
 
 export interface KeyValueIf {
@@ -364,7 +363,7 @@ export class WhMeteringComponent implements OnInit {
         }, 0);
 
         if (this.is_load_graph_visible == "true") {
-            this.load_graph(data); // this function will call for particular customer and site
+            this.load_graph({}); // call with empty data object (previous accidental import created a global 'data')
         }
         console.log("show fuel data: ", this.dg_fuel_system_installed)
         if (this.dg_fuel_system_installed == 'true') {
@@ -385,7 +384,7 @@ export class WhMeteringComponent implements OnInit {
 
 
     ngAfterViewInit() {
-        Observable.interval(15000).subscribe(
+        interval(15000).subscribe(
             response => {
                 if (this.selected_load_options == "4" && this.liveLoadApiCal) {
                     this.load_data_every_second();
@@ -393,7 +392,7 @@ export class WhMeteringComponent implements OnInit {
 
             }
         );
-        Observable.interval(5000).subscribe(
+        interval(5000).subscribe(
             response => {
                 this.getSiteCurrLoadInfoData();
             });

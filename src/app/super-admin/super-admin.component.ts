@@ -11,7 +11,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren, QueryList } 
 import * as Highcharts from 'highcharts';
 
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 //--------------------new---------------------------------

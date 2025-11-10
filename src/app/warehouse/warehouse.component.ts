@@ -13,7 +13,7 @@ import * as Highcharts from 'highcharts';
 //import {MatPaginator} from '@angular/material';
 import { MatSort } from '@angular/material/sort';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 // import {formatDate} from '@angular/common';
 import { formatDate, getLocaleDayNames } from '@angular/common';
