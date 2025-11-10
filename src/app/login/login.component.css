@@ -1,0 +1,128 @@
+.form-group {
+    margin-bottom: 0;
+    padding: 0;
+}
+.bottomImg {
+    width: 100%;
+    height: 145px;
+}
+
+#input1 {
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 4px;
+    padding-left: 10px;
+    color: #fff;
+    font-size: 16px;
+    background: rgba(0,0,0,.3);
+    text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    box-shadow: inset 0 -5px 45px rgba(100,100,100,.2),0 1px 1px rgba(255,255,255,.2);
+}
+
+.logo{
+    margin-top: 30px;
+    margin-bottom: 8px;
+}
+.bottom-text{
+    
+display: inline;
+}
+.example-full-width{
+    width: 300px;
+    color: white;
+}
+
+form button{
+    position: relative;
+    width: 300px;
+    margin-top: 3px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+#fp{
+    position: relative;
+    margin-left: 180px;
+        
+}
+#fp{
+    color: #e66f00;
+    font-size: 14px;
+    
+}
+#avc{
+    color: #e66f00;
+    font-size: 14px;
+}
+#sup{
+    color: #e66f00;
+    font-size: 14px;
+}
+#esm{
+    color: #e66f00;
+    font-size: 18px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+  
+  /* When the input is focused underline color*/
+  .mat-form-field-ripple {
+    background-color: white !important;
+}
+.mat-form-field-underline {
+    display: none;
+}
+
+/* When the input is not focused */
+    .mat-form-field .placeholder {
+        color: #ffffff;
+    }
+    /* When the input is focused */
+    .mat-focused .placeholder{
+        color: white;
+    }
+.mat-raised-button{
+    background-color: #E66F00;
+    background-image: linear-gradient(rgb(236, 206, 73),#e0740f);
+    color: white;
+}
+.modal-content{
+    background:rgb(48, 47, 46);
+    text-align: left;
+    overflow: hidden;
+}
+.modal-header{
+    background:#E66F00;
+}
+.modal-title{
+    color: white;
+}
+.modal-dialog {
+    -webkit-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    top: 10%;
+    margin: 0 auto;
+}
+
+
+label{
+    color:white;
+    
+}
+/* Edited by chirag line133-134*/
+.footimg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 145px;
+}
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+.ng-invalid:not(form)  {
+    border-left: 0px /* red */
+  }
+  .mat-input-element {
+    caret-color: #fff;
+}

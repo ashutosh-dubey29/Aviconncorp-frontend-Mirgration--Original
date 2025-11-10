@@ -1,0 +1,41 @@
+import { Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Inject} from '@angular/core';
+import { DataService } from '../services/data.service';
+export interface DialogData {
+
+  from_date: string;
+  till_date: string;
+ 
+}
+@Component({
+  selector: 'app-custom-date-range-picker',
+  templateUrl: './custom-date-range-picker.component.html',
+  styleUrls: ['./custom-date-range-picker.component.css']
+})
+export class CustomDateRangePickerComponent implements OnInit {
+
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<CustomDateRangePickerComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private dataService:DataService,) { }
+
+
+    date = new FormControl(new Date());
+    serializedDate = new FormControl((new Date()).toISOString().substring(0,10));
+    siteId= localStorage.getItem('siteId');
+    customDateRange = new FormGroup({
+      startDate: new FormControl(''),
+      endDate: new FormControl(''),
+    });
+  ngOnInit() {
+  }
+
+  onSubmit(){
+
+    let reqData = [{"from_date":this.customDateRange.value.startDate,"end_date":this.customDateRange.value.endDate}]
+    this.dialogRef.close(reqData)
+  }
+  onNoClick(){
+    this.dialogRef.close([])
+  }
+}
