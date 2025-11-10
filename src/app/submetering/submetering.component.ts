@@ -78,10 +78,10 @@ export class SubmeteringComponent implements OnInit {
     applyFilter(filterValue: string) {
       this.dataSource.filter = filterValue.trim().toLowerCase();
     }
-    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-    @ViewChild(MatSort, { static: false }) sort: MatSort;
-    @ViewChild(MatTable, { static: false }) table: MatTable<DataTableItem>;
-    @ViewChild('chart', { static: false }) chart;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatTable) table: MatTable<DataTableItem>;
+    @ViewChild('chart') chart;
 
     // helper to normalize series data into Highcharts-friendly form
     private normalizeSeries(inputSeries: any): any[] {

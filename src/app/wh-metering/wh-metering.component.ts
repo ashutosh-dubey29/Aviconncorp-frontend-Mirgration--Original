@@ -153,8 +153,8 @@ export class WhMeteringComponent implements OnInit {
     seprateManinsDgLoadChartOptions: any;
     // Highcharts = Highcharts;
     chartLoading: Boolean = false;
-    @ViewChild('chart', { static: false }) chart;
-    @ViewChild("loadChart", { static: false }) loadChart;
+    @ViewChild('chart') chart;
+    @ViewChild("loadChart") loadChart;
 
     // normalize series data to ensure numeric points and consistent shapes
     private normalizeSeries(inputSeries: any): any[] {

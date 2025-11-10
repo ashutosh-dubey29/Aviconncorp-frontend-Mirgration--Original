@@ -14,7 +14,7 @@ export class LoadGraphComponent implements OnInit {
   lineChartOptions:any;
   Highcharts = Highcharts;
   chartLoading:Boolean=false;
-  @ViewChild('chart', { static: false }) chart;
+  @ViewChild('chart') chart;
   
   
 

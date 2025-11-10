@@ -71,8 +71,8 @@ export class CustomerDashboardComponent  {
   displayedColumns = ['siteid', 'sitename','sitetype', 'siteaddr', 'sitemanager','contact'];
   displayedColumns1 = ['siteid', 'site_name','internet_down', 'light_faulty', 'high_consump','totalalarms'];
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
    applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

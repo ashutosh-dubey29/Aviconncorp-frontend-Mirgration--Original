@@ -23,8 +23,8 @@ import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnack
 })
 
 export class BaselineComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   sites;
   graphTitle: string;
   barChartOptions: any;

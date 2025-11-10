@@ -22,7 +22,7 @@ export class OutputGraphComponent implements OnInit {
    lineChartOptions: any;
    siteId = 90;
    Highcharts = Highcharts;
-  @ViewChild('alarmdata', { static: false }) alarmdata: ElementRef;
+  @ViewChild('alarmdata') alarmdata: ElementRef;
 
   
   loadData(data) {
