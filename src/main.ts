@@ -1,8 +1,9 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import 'hammerjs';
 
@@ -12,10 +13,10 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    // Import providers from the existing AppModule so we don't need to
-    // convert the entire module graph yet. This keeps services and
-    // module-level providers available while using the standalone
-    // bootstrap API.
-    importProvidersFrom(AppModule)
+    // Provide commonly required platform providers that were previously
+    // pulled in via the (now removed) AppModule. Keep this minimal so the
+    // app can boot while the rest of the migration continues.
+    importProvidersFrom(BrowserAnimationsModule),
+    provideHttpClient(withInterceptorsFromDi())
   ]
 }).catch(err => console.error(err));

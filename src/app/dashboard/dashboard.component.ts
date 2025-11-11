@@ -2,7 +2,6 @@ import { GlobalService } from './../services/global.service';
 import { DataService } from './../services/data.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppModule } from '../app.module';
 import { CustomerDashboardComponent } from '../customer-dashboard/customer-dashboard.component';
 import { WarehouseComponent } from '../warehouse/warehouse.component';
 import { BaselineComponent } from '../baseline/baseline.component';
@@ -25,7 +24,7 @@ import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdas
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone: true,
-  imports: [CommonModule, AppModule, CustomerDashboardComponent, WarehouseComponent, BaselineComponent, AdminComponent]
+  imports: [CommonModule, CustomerDashboardComponent, WarehouseComponent, BaselineComponent, AdminComponent]
 })
 export class DashboardComponent implements OnInit {
   isSupperAdmin = true;
