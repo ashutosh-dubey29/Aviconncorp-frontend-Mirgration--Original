@@ -9,7 +9,7 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 import { TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatLegacyDialogModule as MatDialogModule, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import * as Highcharts from 'highcharts';
 import { HighchartsShimDirective } from './app/testing/highcharts-shim.directive';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
@@ -71,27 +72,26 @@ try {
 // Provide common testing modules/providers globally to reduce missing-provider failures
 beforeEach(() => {
   TestBed.configureTestingModule({
-    imports: [
-      HttpClientTestingModule,
-      BrowserAnimationsModule,
-      ReactiveFormsModule,
-      MatDialogModule,
-      MatCardModule,
-      MatSnackBarModule,
-      MatTableModule,
-      MatPaginatorModule,
-      MatSortModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatSelectModule,
-      MatDatepickerModule,
-      MatNativeDateModule
-    ],
     declarations: [HighchartsShimDirective],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+    imports: [BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatCardModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule],
     providers: [
-      { provide: MatDialogRef, useValue: {} },
-      { provide: MAT_DIALOG_DATA, useValue: {} }
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting()
     ]
-    ,schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
-  });
+});
 });

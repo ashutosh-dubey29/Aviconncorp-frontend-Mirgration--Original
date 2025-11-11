@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { GlobalService } from './services/global.service';
 import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { DialogOverComponent } from './dialog-over/dialog-over.component';
@@ -76,8 +76,7 @@ import { HighchartsShimDirective } from './testing/highcharts-shim.directive';
 import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalone.component';
 
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         LoginComponent,
         DialogOverComponent,
@@ -111,10 +110,10 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
         SubmeteringComponent,
         HighchartsShimDirective,
     ],
-    imports: [
-        BrowserModule,
+    exports: [MatDialogModule
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
-        HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
         AppRoutingModule,
@@ -133,26 +132,19 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
         MatTableModule,
         MatSortModule,
         MatMenuModule,
-    HighchartsStandaloneComponent,
-    // HighchartsChartModule removed (see comment above). The local
-    // HighchartsShimDirective provides the `highcharts-chart` selector.
+        HighchartsStandaloneComponent,
+        // HighchartsChartModule removed (see comment above). The local
+        // HighchartsShimDirective provides the `highcharts-chart` selector.
         MatDatepickerModule,
         MatNativeDateModule,
         MatSelectModule,
         MatSnackBarModule,
         MatRadioModule,
         MatCardModule,
-        MatSlideToggleModule,
-    ],
-    exports: [MatDialogModule
-    ],
-    providers: [
+        MatSlideToggleModule], providers: [
         GlobalService,
         ModalService,
-        // [{ provide: HIGHCHARTS_MODULES, useFactory: () => [more, solidGauge] }],
-        //PieGraphComponent
-    ],
-    bootstrap: [AppComponent]
-})
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 
 export class AppModule { }
