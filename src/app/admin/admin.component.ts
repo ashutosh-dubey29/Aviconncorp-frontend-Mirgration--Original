@@ -5,9 +5,9 @@ import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray, Unt
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacySlideToggleChange as MatSlideToggleChange, MatLegacySlideToggle as MatSlideToggle } from '@angular/material/legacy-slide-toggle';
+import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { MovieService } from '../services/movie.service';
 import {chart} from 'highcharts';
 import * as Highcharts from 'highcharts';

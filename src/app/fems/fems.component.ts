@@ -1,9 +1,9 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { UserData } from './../customer-dashboard/customer-dashboard.component';
-import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogConfig as MatDialogConfig} from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FemsDialogComponent } from '../fems-dialog/fems-dialog.component';
 import {AddDeviceDialogComponent} from '../add-device-dialog/add-device-dialog.component'
 import { AddDevtypeDialogComponent } from '../add-devtype-dialog/add-devtype-dialog.component';

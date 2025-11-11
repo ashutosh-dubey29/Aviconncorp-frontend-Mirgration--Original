@@ -1,11 +1,11 @@
 import { Component, OnInit,Inject ,ViewChild } from '@angular/core';
 import { DataService } from './../services/data.service';
-import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogConfig as MatDialogConfig} from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {MatLegacyTable as MatTable} from '@angular/material/legacy-table';
+import { MatTable } from '@angular/material/table';
 import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DataTableItem } from '../super-admin/data-table-datasource';
 
