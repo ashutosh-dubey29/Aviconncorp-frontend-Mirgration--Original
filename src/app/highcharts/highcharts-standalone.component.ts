@@ -21,6 +21,7 @@ export class HighchartsStandaloneComponent implements AfterViewInit, OnChanges, 
   @ViewChild('chartContainer', { static: true }) chartContainer!: ElementRef<HTMLDivElement>;
   @Input() options: Highcharts.Options | any = {};
   @Input() modules: Array<((hc: typeof Highcharts) => void) | null> | null = null;
+  @Input() constructorType: string | null = null; // 'stockChart' | 'chart'
   @Input() updateFlag = false;
 
   private chart?: Highcharts.Chart;
@@ -29,7 +30,11 @@ export class HighchartsStandaloneComponent implements AfterViewInit, OnChanges, 
     this.initModules();
     // Create chart
     try {
-      this.chart = Highcharts.chart(this.chartContainer.nativeElement, this.options || {});
+      if (this.constructorType === 'stockChart' && (Highcharts as any).stockChart) {
+        this.chart = (Highcharts as any).stockChart(this.chartContainer.nativeElement, this.options || {});
+      } else {
+        this.chart = (Highcharts as any).chart(this.chartContainer.nativeElement, this.options || {});
+      }
     } catch (e) {
       // Fail gracefully in case of bad options
       // eslint-disable-next-line no-console
