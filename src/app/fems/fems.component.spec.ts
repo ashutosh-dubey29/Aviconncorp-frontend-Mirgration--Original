@@ -8,7 +8,7 @@ describe('FemsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FemsComponent ]
+      imports: [ FemsComponent ]
     })
     .compileComponents();
   }));

@@ -1,14 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import * as Highcharts from 'highcharts';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataService } from '../services/data.service';
 import { Observable } from 'rxjs';
 
 
 @Component({
-    selector: 'app-load-graph',
-    templateUrl: './load-graph.component.html',
-    styleUrls: ['./load-graph.component.css'],
-    standalone: false
+  selector: 'app-load-graph',
+  templateUrl: './load-graph.component.html',
+  styleUrls: ['./load-graph.component.css'],
+  standalone: true,
+  imports: [CommonModule, HighchartsStandaloneComponent, MatProgressSpinnerModule]
 })
 export class LoadGraphComponent implements OnInit {
   lineChartOptions:any;

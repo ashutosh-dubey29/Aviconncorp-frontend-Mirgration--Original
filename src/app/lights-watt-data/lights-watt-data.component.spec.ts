@@ -8,7 +8,7 @@ describe('LightsWattDataComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LightsWattDataComponent ]
+      imports: [ LightsWattDataComponent ]
     })
     .compileComponents();
   }));

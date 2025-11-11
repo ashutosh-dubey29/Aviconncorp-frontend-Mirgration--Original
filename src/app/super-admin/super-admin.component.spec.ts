@@ -8,7 +8,7 @@ describe('SuperAdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SuperAdminComponent ]
+      imports: [ SuperAdminComponent ]
     })
     .compileComponents();
   }));

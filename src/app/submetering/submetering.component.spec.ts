@@ -8,7 +8,7 @@ describe('SubmeteringComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubmeteringComponent ]
+      imports: [ SubmeteringComponent ]
     })
     .compileComponents();
   }));

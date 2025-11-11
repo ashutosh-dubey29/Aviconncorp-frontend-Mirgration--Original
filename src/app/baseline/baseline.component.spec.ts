@@ -8,7 +8,7 @@ describe('BaselineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BaselineComponent ]
+      imports: [ BaselineComponent ]
     })
     .compileComponents();
   }));

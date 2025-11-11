@@ -8,13 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './login/login.component';
+// LoginComponent converted to standalone; removed from module imports
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { GlobalService } from './services/global.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogOverComponent } from './dialog-over/dialog-over.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -25,7 +24,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
@@ -43,71 +41,106 @@ import { MatCardModule } from '@angular/material/card';
 
 import { ComingDashComponent } from './coming-dash/coming-dash.component';
 import { OutputGraphComponent } from './output-graph/output-graph.component';
-import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
-import { WarehouseComponent } from './warehouse/warehouse.component';
-import { WhMeteringComponent } from './wh-metering/wh-metering.component';
-import { BaselineComponent } from './baseline/baseline.component';
+// CustomerDashboardComponent converted to standalone; removed from module declarations
+// WarehouseComponent converted to standalone; removed from module imports
+// BaselineComponent converted to standalone; removed from module imports
 import { DialogSwitchdashComponent } from './dialog-switchdash/dialog-switchdash.component';
 import { MatSnackBarModule, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { AdminComponent } from './admin/admin.component';
+// AdminComponent converted to standalone; removed from module imports
 import { AlarmComponent } from './alarm/alarm.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import * as more from 'highcharts/highcharts-more.src';
 import * as solidGauge from 'highcharts/modules/solid-gauge.src';
 import { FirePumpAlarmComponent } from './fire-pump-alarm/fire-pump-alarm.component';
-import { FemsComponent } from './fems/fems.component';
 import { AddDeviceDialogComponent } from './add-device-dialog/add-device-dialog.component';
 import { FemsDialogComponent } from './fems-dialog/fems-dialog.component';
 import { AddDevtypeDialogComponent } from './add-devtype-dialog/add-devtype-dialog.component';
-import { LightsWattDataComponent } from './lights-watt-data/lights-watt-data.component';
 import { FanswattdataComponent } from './fanswattdata/fanswattdata.component';
 import { DeviceDetailsFemsComponent } from './device-details-fems/device-details-fems.component';
 import { ExpiredDeviceDetailsFemsComponent } from './expired-device-details-fems/expired-device-details-fems.component';
 import { AvgDataComponent } from './avg-data/avg-data.component';
 import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
-import { LoadGraphComponent } from './load-graph/load-graph.component';
 import { PfTableComponent } from './pf-table/pf-table.component';
 import { LoadDataTableComponent } from './load-data-table/load-data-table.component';
 import { CustomDateRangePickerComponent } from './custom-date-range-picker/custom-date-range-picker.component';
 import { DgFuelExcelExportComponent } from './dg-fuel-excel-export/dg-fuel-excel-export.component';
-import { SubmeteringComponent } from './submetering/submetering.component';
 import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalone.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent,
-    DialogOverComponent,
-    DashboardComponent,
-    SuperAdminComponent,
+    
+  DialogOverComponent,
+    
     ComingDashComponent,
     OutputGraphComponent,
-    CustomerDashboardComponent,
-    WarehouseComponent,
-    WhMeteringComponent,
-    BaselineComponent,
-    DialogSwitchdashComponent,
-    AdminComponent,
+    
+  
+  DialogSwitchdashComponent,
     AlarmComponent,
     FirePumpAlarmComponent,
-    FemsComponent,
+    
     AddDeviceDialogComponent,
     FemsDialogComponent,
     AddDevtypeDialogComponent,
-    LightsWattDataComponent,
+    
     FanswattdataComponent,
     DeviceDetailsFemsComponent,
     ExpiredDeviceDetailsFemsComponent,
     AvgDataComponent,
     ExcelsheetComponent,
-    LoadGraphComponent,
+    
     PfTableComponent,
     LoadDataTableComponent,
     CustomDateRangePickerComponent,
     DgFuelExcelExportComponent,
-  SubmeteringComponent,
   ],
-  exports: [MatDialogModule
+  exports: [
+    // Material modules exported so standalone components can import AppModule
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatGridListModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatRadioModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    // Export UI components declared in this module so standalone Dashboard can use them
+    ComingDashComponent,
+    OutputGraphComponent,
+    
+    DialogSwitchdashComponent,
+    AlarmComponent,
+    FirePumpAlarmComponent,
+    
+    AddDeviceDialogComponent,
+    FemsDialogComponent,
+    AddDevtypeDialogComponent,
+    
+    FanswattdataComponent,
+    DeviceDetailsFemsComponent,
+    ExpiredDeviceDetailsFemsComponent,
+    AvgDataComponent,
+    ExcelsheetComponent,
+    
+  PfTableComponent,
+  LoadDataTableComponent,
+  CustomDateRangePickerComponent,
+  DgFuelExcelExportComponent,
   ],
   imports: [BrowserModule,
     BrowserAnimationsModule,
@@ -129,7 +162,7 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
     MatTableModule,
     MatSortModule,
     MatMenuModule,
-    HighchartsStandaloneComponent,
+  HighchartsStandaloneComponent,
     // HighchartsChartModule removed (see comment above). The local
     // HighchartsShimDirective provides the `highcharts-chart` selector.
     MatDatepickerModule,

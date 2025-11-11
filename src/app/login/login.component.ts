@@ -8,7 +8,13 @@ import { DataService } from './../services/data.service';
 
 import { GlobalService } from './../services/global.service';
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { Router, RouterModule } from '@angular/router';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -19,9 +25,10 @@ import { resetpassword } from '../models/resetpassword';
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [UserService],
-    standalone: false
+  encapsulation: ViewEncapsulation.None,
+  providers: [UserService],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDialogModule, RouterModule]
 })
 
 export class LoginComponent implements OnInit {

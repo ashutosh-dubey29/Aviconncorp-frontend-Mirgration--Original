@@ -1,6 +1,13 @@
 import { GlobalService } from './../services/global.service';
 import { DataService } from './../services/data.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AppModule } from '../app.module';
+import { CustomerDashboardComponent } from '../customer-dashboard/customer-dashboard.component';
+import { WarehouseComponent } from '../warehouse/warehouse.component';
+import { BaselineComponent } from '../baseline/baseline.component';
+import { AdminComponent } from '../admin/admin.component';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,10 +21,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css'],
-    standalone: false
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css'],
+  standalone: true,
+  imports: [CommonModule, AppModule, CustomerDashboardComponent, WarehouseComponent, BaselineComponent, AdminComponent, HighchartsStandaloneComponent]
 })
 export class DashboardComponent implements OnInit {
   isSupperAdmin = true;

@@ -4,6 +4,13 @@ import { CustomerDetailsModel } from './../models/user';
 import { UserService } from './../services/user.service';
 import { DataService } from './../services/data.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,7 +20,16 @@ import * as Highcharts from 'highcharts';
     selector: 'app-customer-dashboard',
     templateUrl: './customer-dashboard.component.html',
     styleUrls: ['./customer-dashboard.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatFormFieldModule,
+      MatInputModule,
+      HighchartsStandaloneComponent,
+    ]
 })
 
 export class CustomerDashboardComponent  {

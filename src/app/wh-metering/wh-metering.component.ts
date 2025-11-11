@@ -9,6 +9,8 @@ import { DashboardDataService } from './../services/dashboard-data.service';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // Note: removed use of internal throwMatDialogContentAlreadyAttachedError which is no longer exported
 // from Angular Material in v16.
 import * as Highcharts from 'highcharts';
@@ -20,15 +22,26 @@ import { formatDate, getLocaleDayNames } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
 // import * as solidGauge from 'highcharts/modules/solid-gauge.src';
 import { chart } from 'highcharts';
-declare var require: any;
-const Boost = require('highcharts/modules/boost');
-const noData = require('highcharts/modules/no-data-to-display');
-const More = require('highcharts/highcharts-more');
+// Defer loading Highcharts modules until runtime (constructor) so tests can
+// stub Highcharts before modules attempt to patch it. Loading modules at
+// top-level causes test-time errors because the library internals are not
+// yet prepared.
 import { ExcelsheetComponent } from '../excelsheet/excelsheet.component';
 import { PfTableComponent } from '../pf-table/pf-table.component';
 // import { LightsWattDataComponent } from '../lights-watt-data/lights-watt-data.component';
@@ -49,8 +62,25 @@ export interface KeyValueIf {
     templateUrl: './wh-metering.component.html',
     styleUrls: ['./wh-metering.component.css']
     //providers:[PieGraphComponent]
-    ,
-    standalone: false
+        ,
+        standalone: true,
+        imports: [
+            CommonModule,
+            ReactiveFormsModule,
+            FormsModule,
+            MatTableModule,
+            MatPaginatorModule,
+            MatSortModule,
+            MatDialogModule,
+            MatFormFieldModule,
+            MatInputModule,
+            MatSelectModule,
+            MatDatepickerModule,
+            MatNativeDateModule,
+                    MatButtonModule,
+                    // local Highcharts wrapper (standalone)
+                    HighchartsStandaloneComponent
+        ]
 })
 export class WhMeteringComponent implements OnInit {
 
@@ -127,8 +157,8 @@ export class WhMeteringComponent implements OnInit {
     pieChart = Highcharts;
     // wrapper update toggle used by the standalone component
     chartUpdateFlag = false;
-    // modules to pass into the standalone wrapper
-    hcModules: Array<any> = [Boost, noData, More];
+    // modules to pass into the standalone wrapper — populated in constructor
+    hcModules: Array<any> = [];
 
     get updateFlag(): boolean { return this._updateFlag; }
     set updateFlag(val: boolean) {
@@ -212,6 +242,32 @@ export class WhMeteringComponent implements OnInit {
         private router: Router,
         public dialog: MatDialog,
     ) {
+                // Try to require Highcharts modules at runtime. Wrap in try/catch so
+                // tests (which stub Highcharts) or environments without require don't
+                // crash during module loading.
+                // Try to dynamically import Highcharts modules at runtime. Using
+                // dynamic `import()` avoids referring to `require` (which breaks
+                // type checking for AOT builds) and keeps module loading lazy so
+                // tests that stub Highcharts won't be patched prematurely.
+                (async () => {
+                    try {
+                        const modBoost = await import('highcharts/modules/boost');
+                        const modNoData = await import('highcharts/modules/no-data-to-display');
+                        const modMore = await import('highcharts/highcharts-more');
+
+                        const unwrap = (m: any) => (m && (m.default || m)) || m;
+
+                        const Boost = unwrap(modBoost);
+                        const noData = unwrap(modNoData);
+                        const More = unwrap(modMore);
+
+                        this.hcModules = [Boost, noData, More].filter(Boolean);
+                    } catch (e) {
+                        // ignore failures during tests or in environments where
+                        // dynamic import can't resolve the modules
+                        this.hcModules = [];
+                    }
+                })();
         this.show_dg_mains_run_time = localStorage.getItem('show_dg_mains_run_time');
         if (this.show_dg_mains_run_time == "true") {
             this.graphTypes = [

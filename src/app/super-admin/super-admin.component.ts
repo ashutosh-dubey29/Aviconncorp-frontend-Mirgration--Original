@@ -7,6 +7,7 @@ import { LoginComponent } from './../login/login.component';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { CommonModule } from '@angular/common';
 // import { MatPaginator, MatSort, MatTableDataSource, MatTable } from '@angular/material';
 import * as Highcharts from 'highcharts';
 
@@ -18,6 +19,11 @@ import { Router } from '@angular/router';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 //----------------------------------------------------------
 
 
@@ -44,7 +50,16 @@ export interface AlarmData {
     selector: 'app-super-admin',
     templateUrl: './super-admin.component.html',
     styleUrls: ['./super-admin.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      // Material modules used in the template
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatFormFieldModule,
+      MatInputModule
+    ]
 })
 
 export class SuperAdminComponent {

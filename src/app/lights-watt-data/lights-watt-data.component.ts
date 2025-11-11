@@ -1,9 +1,16 @@
 import { Component, OnInit ,Inject ,ViewChild} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from './../services/data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { DataTableItem } from '../super-admin/data-table-datasource';
 import { MatTable } from '@angular/material/table';
@@ -17,7 +24,16 @@ export class DialogData{
     selector: 'app-lights-watt-data',
     templateUrl: './lights-watt-data.component.html',
     styleUrls: ['./lights-watt-data.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatDialogModule
+    ]
 })
 
 

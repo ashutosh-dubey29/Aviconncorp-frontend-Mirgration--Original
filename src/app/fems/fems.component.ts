@@ -1,7 +1,16 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { UserData } from './../customer-dashboard/customer-dashboard.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FemsDialogComponent } from '../fems-dialog/fems-dialog.component';
@@ -33,7 +42,18 @@ export interface DialogData {
     selector: 'app-fems',
     templateUrl: './fems.component.html',
     styleUrls: ['./fems.component.css'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatDialogModule,
+      MatButtonModule,
+      MatIconModule,
+      MatFormFieldModule,
+      MatInputModule
+    ]
 })
 
 export class FemsComponent implements OnInit {

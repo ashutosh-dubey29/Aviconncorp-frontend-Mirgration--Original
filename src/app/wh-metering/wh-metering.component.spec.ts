@@ -9,7 +9,7 @@ describe('WhMeteringComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WhMeteringComponent ],
+      imports: [ WhMeteringComponent ],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();

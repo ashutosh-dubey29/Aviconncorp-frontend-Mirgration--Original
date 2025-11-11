@@ -8,7 +8,7 @@ describe('LoadGraphComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadGraphComponent ]
+      imports: [ LoadGraphComponent ]
     })
     .compileComponents();
   }));
