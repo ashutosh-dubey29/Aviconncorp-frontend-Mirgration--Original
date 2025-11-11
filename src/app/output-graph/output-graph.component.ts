@@ -1,24 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import * as Highcharts from 'highcharts';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from './../services/user.service';
 
+// We will pass heavy/highcharts modules into the standalone wrapper component
+// instead of initializing them globally here. Use require to keep compatibility
+// with the project's existing Highcharts v7 layout.
 declare var require: any;
 let Boost = require('highcharts/modules/boost');
 let noData = require('highcharts/modules/no-data-to-display');
 let More = require('highcharts/highcharts-more');
-
-// Only initialize heavy/highcharts modules in non-test environments.
-// Karma defines window.__karma__ — skip module initialization when running tests.
-try {
-  if (!(window as any).__karma__) {
-    Boost(Highcharts);
-    noData(Highcharts);
-    More(Highcharts);
-    noData(Highcharts);
-  }
-} catch (e) {
-  // ignore in case window is not available or modules throw in some environments
-}
 
 @Component({
   selector: 'app-output-graph',
@@ -26,24 +15,20 @@ try {
   styleUrls: ['./output-graph.component.css']
 })
 export class OutputGraphComponent implements OnInit {
-   lineChartOptions: any;
-   siteId = 90;
-   Highcharts = Highcharts;
-  @ViewChild('alarmdata') alarmdata: ElementRef;
+  lineChartOptions: any;
+  siteId = 90;
+  // Pass module functions to the wrapper
+  hcModules: Array<any> = [Boost, noData, More];
+  // Simple toggle to force the wrapper to call update
+  chartUpdateFlag = false;
 
-  
-  loadData(data) {
-    this.alarmdata.nativeElement.innerHTML = data;
-}
+  constructor(private UserService: UserService,) { }
 
-constructor(private UserService: UserService,) { }
+  ngOnInit() {
+    this.getMonthlyTrend();
+  }
 
-ngOnInit() {
-  Highcharts.chart('alarmdata', this.lineChartOptions);
-  this.getMonthlyTrend();
-}
- 
-getMonthlyTrend(){
+  getMonthlyTrend(){
 
   let data1 = {'site_id': this.siteId};
   this.UserService.energySavingMonthlyTrend(data1).subscribe(
@@ -62,7 +47,7 @@ getMonthlyTrend(){
             seriesData.push(data2);
           }
 
-    // highcharts = Highcharts;
+    // Compose options for the standalone wrapper
     this.lineChartOptions = {
       colorCount:'4',
       colors: ['#90ED7D','#ff7a01', '#7cb5ec', '#058DC7'],
@@ -109,10 +94,13 @@ getMonthlyTrend(){
       legend :{
         itemStyle : {color:'white',},
       },
-      series:  seriesData 
-            }  
-    console.log("graph data", this.lineChartOptions)
-});
+  series:  seriesData 
+    };
+
+    // toggle update flag so the wrapper updates (or creates) the chart
+    this.chartUpdateFlag = !this.chartUpdateFlag;
+    console.log("graph data", this.lineChartOptions);
+    });
 
 }
   }

@@ -73,6 +73,7 @@ import { CustomDateRangePickerComponent } from './custom-date-range-picker/custo
 import { DgFuelExcelExportComponent } from './dg-fuel-excel-export/dg-fuel-excel-export.component';
 import { SubmeteringComponent } from './submetering/submetering.component';
 import { HighchartsShimDirective } from './testing/highcharts-shim.directive';
+import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalone.component';
 
 
 @NgModule({
@@ -132,6 +133,7 @@ import { HighchartsShimDirective } from './testing/highcharts-shim.directive';
         MatTableModule,
         MatSortModule,
         MatMenuModule,
+    HighchartsStandaloneComponent,
     // HighchartsChartModule removed (see comment above). The local
     // HighchartsShimDirective provides the `highcharts-chart` selector.
         MatDatepickerModule,
