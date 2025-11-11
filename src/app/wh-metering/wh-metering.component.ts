@@ -11,7 +11,8 @@ import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatLegacyTableDataSource as MatTableDataSource, MatLegacyTable as MatTable } from '@angular/material/legacy-table';
-import { throwMatDialogContentAlreadyAttachedError } from '@angular/material/legacy-dialog';
+// Note: removed use of internal throwMatDialogContentAlreadyAttachedError which is no longer exported
+// from Angular Material in v16.
 import * as Highcharts from 'highcharts';
 //import {MatPaginator} from '@angular/material';
 // import { MatSort } from '@angular/material/sort';
