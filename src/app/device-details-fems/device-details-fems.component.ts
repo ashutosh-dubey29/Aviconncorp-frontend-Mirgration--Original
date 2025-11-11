@@ -1,4 +1,11 @@
 import { Component, OnInit,Inject ,ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { DataService } from './../services/data.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -27,7 +34,8 @@ export interface UserData {
     selector: 'app-device-details-fems',
     templateUrl: './device-details-fems.component.html',
     styleUrls: ['./device-details-fems.component.css'],
-    standalone: false
+  standalone: true,
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule]
 })
 export class DeviceDetailsFemsComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>; 

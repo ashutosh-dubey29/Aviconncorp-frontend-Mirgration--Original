@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UntypedFormGroup, UntypedFormControl,Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { DataService } from '../services/data.service';
 
 export interface DialogData {
@@ -14,10 +20,11 @@ export interface DialogData {
 
 
 @Component({
-    selector: 'app-add-devtype-dialog',
-    templateUrl: './add-devtype-dialog.component.html',
-    styleUrls: ['./add-devtype-dialog.component.css'],
-    standalone: false
+  selector: 'app-add-devtype-dialog',
+  templateUrl: './add-devtype-dialog.component.html',
+  styleUrls: ['./add-devtype-dialog.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule]
 })
 
 export class AddDevtypeDialogComponent implements OnInit {

@@ -13,7 +13,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { GlobalService } from './services/global.service';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogOverComponent } from './dialog-over/dialog-over.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -39,65 +38,29 @@ import { MatCardModule } from '@angular/material/card';
 // module so the app can build. Replace with the real module after updating
 // `highcharts-angular` to an Ivy/ESM-compatible release.
 
-import { ComingDashComponent } from './coming-dash/coming-dash.component';
-import { OutputGraphComponent } from './output-graph/output-graph.component';
 // CustomerDashboardComponent converted to standalone; removed from module declarations
 // WarehouseComponent converted to standalone; removed from module imports
 // BaselineComponent converted to standalone; removed from module imports
-import { DialogSwitchdashComponent } from './dialog-switchdash/dialog-switchdash.component';
 import { MatSnackBarModule, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 // AdminComponent converted to standalone; removed from module imports
-import { AlarmComponent } from './alarm/alarm.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import * as more from 'highcharts/highcharts-more.src';
-import * as solidGauge from 'highcharts/modules/solid-gauge.src';
-import { FirePumpAlarmComponent } from './fire-pump-alarm/fire-pump-alarm.component';
-import { AddDeviceDialogComponent } from './add-device-dialog/add-device-dialog.component';
-import { FemsDialogComponent } from './fems-dialog/fems-dialog.component';
-import { AddDevtypeDialogComponent } from './add-devtype-dialog/add-devtype-dialog.component';
-import { FanswattdataComponent } from './fanswattdata/fanswattdata.component';
-import { DeviceDetailsFemsComponent } from './device-details-fems/device-details-fems.component';
-import { ExpiredDeviceDetailsFemsComponent } from './expired-device-details-fems/expired-device-details-fems.component';
-import { AvgDataComponent } from './avg-data/avg-data.component';
-import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
-import { PfTableComponent } from './pf-table/pf-table.component';
-import { LoadDataTableComponent } from './load-data-table/load-data-table.component';
-import { CustomDateRangePickerComponent } from './custom-date-range-picker/custom-date-range-picker.component';
-import { DgFuelExcelExportComponent } from './dg-fuel-excel-export/dg-fuel-excel-export.component';
-import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalone.component';
+// Note: most UI components have been converted to standalone components.
+// This module now acts as a compatibility bag that provides and re-exports
+// Angular Material modules and other central providers for any remaining
+// non-standalone code.
 
 
 @NgModule({
-  declarations: [
-    
-  DialogOverComponent,
-    
-    ComingDashComponent,
-    OutputGraphComponent,
-    
-  
-  DialogSwitchdashComponent,
-    AlarmComponent,
-    FirePumpAlarmComponent,
-    
-    AddDeviceDialogComponent,
-    FemsDialogComponent,
-    AddDevtypeDialogComponent,
-    
-    FanswattdataComponent,
-    DeviceDetailsFemsComponent,
-    ExpiredDeviceDetailsFemsComponent,
-    AvgDataComponent,
-    ExcelsheetComponent,
-    
-    PfTableComponent,
-    LoadDataTableComponent,
-    CustomDateRangePickerComponent,
-    DgFuelExcelExportComponent,
+  declarations: [],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [
-    // Material modules exported so standalone components can import AppModule
-    MatDialogModule,
+    // Re-export commonly used Material modules for legacy non-standalone code
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
@@ -107,6 +70,7 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatDialogModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatTableModule,
@@ -119,63 +83,12 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
     MatRadioModule,
     MatCardModule,
     MatSlideToggleModule,
-    // Export UI components declared in this module so standalone Dashboard can use them
-    ComingDashComponent,
-    OutputGraphComponent,
-    
-    DialogSwitchdashComponent,
-    AlarmComponent,
-    FirePumpAlarmComponent,
-    
-    AddDeviceDialogComponent,
-    FemsDialogComponent,
-    AddDevtypeDialogComponent,
-    
-    FanswattdataComponent,
-    DeviceDetailsFemsComponent,
-    ExpiredDeviceDetailsFemsComponent,
-    AvgDataComponent,
-    ExcelsheetComponent,
-    
-  PfTableComponent,
-  LoadDataTableComponent,
-  CustomDateRangePickerComponent,
-  DgFuelExcelExportComponent,
   ],
-  imports: [BrowserModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    FormsModule,
-    AppRoutingModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatIconModule,
-    MatGridListModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDialogModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatSortModule,
-  MatMenuModule,
-  HighchartsStandaloneComponent,
-  // HighchartsChartModule removed (see comment above). The local
-    // HighchartsShimDirective provides the `highcharts-chart` selector.
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatRadioModule,
-    MatCardModule,
-    MatSlideToggleModule], providers: [
-      GlobalService,
-      ModalService,
-      provideHttpClient(withInterceptorsFromDi()),
-    ]
+  providers: [
+    GlobalService,
+    ModalService,
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
 })
 
 export class AppModule { }

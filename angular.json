@@ -38,13 +38,7 @@
             ],
             "browser": "src/main.ts"
             ,
-            "allowedCommonJsDependencies": [
-              "hammerjs",
-              "highcharts",
-              "highcharts/modules/boost",
-              "highcharts/modules/no-data-to-display",
-              "highcharts/highcharts-more"
-            ]
+            
           },
           "configurations": {
             "production": {
@@ -106,14 +100,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
-            ]
-            ,
-            "allowedCommonJsDependencies": [
-              "hammerjs",
-              "highcharts",
-              "highcharts/modules/boost",
-              "highcharts/modules/no-data-to-display",
-              "highcharts/highcharts-more"
             ]
           }
         },

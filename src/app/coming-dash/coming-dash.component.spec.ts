@@ -1,5 +1,4 @@
 import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ComingDashComponent } from './coming-dash.component';
 
 describe('ComingDashComponent', () => {
@@ -8,7 +7,7 @@ describe('ComingDashComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ComingDashComponent ]
+      imports: [ ComingDashComponent ]
     })
     .compileComponents();
   }));

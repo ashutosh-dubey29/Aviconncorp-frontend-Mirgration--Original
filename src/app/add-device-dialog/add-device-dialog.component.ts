@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 import {formatDate, getLocaleDayNames} from '@angular/common';
 import { FemsComponent } from '../fems/fems.component';
@@ -22,10 +30,11 @@ export interface DialogData {
 }
 
 @Component({
-    selector: 'app-add-device-dialog',
-    templateUrl: './add-device-dialog.component.html',
-    styleUrls: ['./add-device-dialog.component.css'],
-    standalone: false
+  selector: 'app-add-device-dialog',
+  templateUrl: './add-device-dialog.component.html',
+  styleUrls: ['./add-device-dialog.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatDialogModule]
 })
 export class AddDeviceDialogComponent implements OnInit {
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<AddDeviceDialogComponent>,

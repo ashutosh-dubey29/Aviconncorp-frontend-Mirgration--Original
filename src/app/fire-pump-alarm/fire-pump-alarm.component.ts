@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { UserService } from '../services/user.service';
 import { Observable, interval } from 'rxjs';
 import { DataRowOutlet } from '@angular/cdk/table';
@@ -20,10 +24,11 @@ export interface EmailData {
 
 
 @Component({
-    selector: 'app-fire-pump-alarm',
-    templateUrl: './fire-pump-alarm.component.html',
-    styleUrls: ['./fire-pump-alarm.component.css'],
-    standalone: false
+  selector: 'app-fire-pump-alarm',
+  templateUrl: './fire-pump-alarm.component.html',
+  styleUrls: ['./fire-pump-alarm.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule]
 })
 
 
