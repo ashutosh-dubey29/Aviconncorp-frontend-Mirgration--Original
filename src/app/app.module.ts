@@ -69,6 +69,7 @@ import { LoadDataTableComponent } from './load-data-table/load-data-table.compon
 import { CustomDateRangePickerComponent } from './custom-date-range-picker/custom-date-range-picker.component';
 import { DgFuelExcelExportComponent } from './dg-fuel-excel-export/dg-fuel-excel-export.component';
 import { SubmeteringComponent } from './submetering/submetering.component';
+import { HighchartsShimDirective } from './testing/highcharts-shim.directive';
 
 
 @NgModule({
@@ -104,6 +105,7 @@ import { SubmeteringComponent } from './submetering/submetering.component';
         CustomDateRangePickerComponent,
         DgFuelExcelExportComponent,
         SubmeteringComponent,
+        HighchartsShimDirective,
     ],
     imports: [
         BrowserModule,

@@ -35,14 +35,13 @@ export class ExcelsheetComponent implements OnInit {
 
   ngOnInit() {
   
-    if (this.data !== null){
-      this.excelDataForm.setValue({
-        startDate: this.data.from_date ? this.data.from_date:"",
-        endDate: this.data.till_date?this.data.till_date:"", 
-      
+    if (this.data) {
+      // patchValue tolerates missing properties and is safer during tests
+      this.excelDataForm.patchValue({
+        startDate: this.data.from_date ? this.data.from_date : "",
+        endDate: this.data.till_date ? this.data.till_date : "",
       });
     }
-
 
   }
 

@@ -34,12 +34,11 @@ export class AddDevtypeDialogComponent implements OnInit {
 
   
   ngOnInit() {
-    if (this.data !== null){
-      this.devTypeDataForm.setValue({ 
-        deviceName: this.data.deviceName, 
+    if (this.data) {
+      // patchValue so missing fields won't break tests
+      this.devTypeDataForm.patchValue({
+        deviceName: this.data.deviceName,
         category: this.data.category,
-       
-       
       });
     }
 

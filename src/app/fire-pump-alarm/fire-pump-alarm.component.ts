@@ -38,7 +38,8 @@ export class FirePumpAlarmComponent implements OnInit {
   myObj = JSON.parse(localStorage.getItem("account"));
   user_id = this.myObj["id"];
   user_type = this.myObj["UserType"];
-  alarmData = []
+  // Provide defaults so templates that index alarmData don't break before data arrives.
+  alarmData: any[] = [{}, {}, {}, {}, {}];
   main:any;
   aisleName:any;
   auto:any;

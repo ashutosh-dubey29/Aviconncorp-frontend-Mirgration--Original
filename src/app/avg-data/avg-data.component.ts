@@ -40,12 +40,14 @@ export class AvgDataComponent implements OnInit {
     });
   ngOnInit() {
     console.log("#################### I am in ngOnInit fuction: ", this.data);
-    if (this.data !== null){
-      this.avgDataForm.setValue({
-        startDate: this.data.from_date ? this.data.from_date:"",
-        endDate: this.data.till_date?this.data.till_date:"", 
-        avgvalue: this.data.avgValue?this.data.avgValue:"",
-        energyConsumed:this.data.energyConsumed?this.data.energyConsumed:""
+    if (this.data) {
+      // use patchValue so missing controls don't cause setValue to throw
+      this.avgDataForm.patchValue({
+        startDate: this.data.from_date ? this.data.from_date : "",
+        endDate: this.data.till_date ? this.data.till_date : "",
+        avgvalue: this.data.avgValue ? this.data.avgValue : "",
+        // component historically used energyConsumed but form uses totalvalue; patchValue avoids strict mismatch
+        totalvalue: this.data.energyConsumed ? this.data.energyConsumed : ""
       });
     }
     

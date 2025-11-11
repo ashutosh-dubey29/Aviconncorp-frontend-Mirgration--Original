@@ -50,20 +50,21 @@ export class AddDeviceDialogComponent implements OnInit {
   ngOnInit() {
     console.log("#################### I am in ngOnInit fuction: ", this.data);
     this.getDeviceName();
-    if (this.data !== null){
-      this.inventoryDataForm.setValue({
-        deviceId: this.data.id?this.data.id:"",
-        deviceName: this.data.deviceName?this.data.deviceName:"",
-        deviceAssetNo:this.data.assetNo?this.data.assetNo:"",
-        deviceModelNo: this.data.modelno?this.data.modelno:"",
-        location: this.data.location ? this.data.location:"", 
-        warrantyTillDate: this.data.warrenty ? this.data.warrenty:"",
-        nextServiceDate: this.data.next_service?this.data.next_service:"", 
-        lastServiceDate: this.data.last_service?this.data.last_service:"",
-        updatedBy: this.data.updatedBy?this.data.updatedBy:"",
+    if (this.data) {
+      // patchValue so tests with undefined MAT_DIALOG_DATA don't fail
+      this.inventoryDataForm.patchValue({
+        deviceId: this.data.id ? this.data.id : "",
+        deviceName: this.data.deviceName ? this.data.deviceName : "",
+        deviceAssetNo: this.data.assetNo ? this.data.assetNo : "",
+        deviceModelNo: this.data.modelno ? this.data.modelno : "",
+        location: this.data.location ? this.data.location : "",
+        warrantyTillDate: this.data.warrenty ? this.data.warrenty : "",
+        nextServiceDate: this.data.next_service ? this.data.next_service : "",
+        lastServiceDate: this.data.last_service ? this.data.last_service : "",
+        updatedBy: this.data.updatedBy ? this.data.updatedBy : "",
       });
     }
-    
+
   }
  
 

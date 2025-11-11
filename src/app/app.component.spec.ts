@@ -30,6 +30,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to movie-rater-web!');
+    // App no longer renders an <h1> by default (uses router-outlet). Verify root outlet exists.
+    expect(compiled.querySelector('router-outlet')).not.toBeNull();
   });
 });
