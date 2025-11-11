@@ -1,6 +1,9 @@
 import { Directive, Input } from '@angular/core';
 
-@Directive({ selector: 'highcharts-chart' })
+@Directive({
+    selector: 'highcharts-chart',
+    standalone: false
+})
 export class HighchartsShimDirective {
   @Input() Highcharts: any;
   @Input() constructorType: any;

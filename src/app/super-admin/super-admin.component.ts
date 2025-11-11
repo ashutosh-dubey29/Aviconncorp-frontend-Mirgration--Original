@@ -41,9 +41,10 @@ export interface AlarmData {
 }
 
 @Component({
-  selector: 'app-super-admin',
-  templateUrl: './super-admin.component.html',
-  styleUrls: ['./super-admin.component.css'],
+    selector: 'app-super-admin',
+    templateUrl: './super-admin.component.html',
+    styleUrls: ['./super-admin.component.css'],
+    standalone: false
 })
 
 export class SuperAdminComponent {
