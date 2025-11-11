@@ -25,8 +25,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import * as Highcharts from 'highcharts';
 import { HighchartsShimDirective } from './app/testing/highcharts-shim.directive';
 
-declare const require: any;
-
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
@@ -96,7 +94,3 @@ beforeEach(() => {
     ,schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
   });
 });
-// Then we find all the tests.
-const context = require.context('./', true, /\.spec\.ts$/);
-// And load the modules.
-context.keys().map(context);
