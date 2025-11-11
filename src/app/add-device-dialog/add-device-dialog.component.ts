@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import {formatDate, getLocaleDayNames} from '@angular/common';
 import { FemsComponent } from '../fems/fems.component';
@@ -31,20 +31,20 @@ export class AddDeviceDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private dataService:DataService) { }
 
     siteId= localStorage.getItem('siteId');
-    date = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString().substring(0,10));
+    date = new UntypedFormControl(new Date());
+    serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0,10));
 
   
-    inventoryDataForm = new FormGroup({
-      deviceId: new FormControl(''),
-      deviceAssetNo: new FormControl(''),
-      deviceName: new FormControl(''),
-      deviceModelNo: new FormControl(''),
-      location: new FormControl(''),
-      warrantyTillDate: new FormControl(''),
-      nextServiceDate: new FormControl(''),
-      lastServiceDate: new FormControl(''),
-      updatedBy: new FormControl('')
+    inventoryDataForm = new UntypedFormGroup({
+      deviceId: new UntypedFormControl(''),
+      deviceAssetNo: new UntypedFormControl(''),
+      deviceName: new UntypedFormControl(''),
+      deviceModelNo: new UntypedFormControl(''),
+      location: new UntypedFormControl(''),
+      warrantyTillDate: new UntypedFormControl(''),
+      nextServiceDate: new UntypedFormControl(''),
+      lastServiceDate: new UntypedFormControl(''),
+      updatedBy: new UntypedFormControl('')
 
     });
   ngOnInit() {

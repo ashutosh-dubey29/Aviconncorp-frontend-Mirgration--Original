@@ -1,5 +1,7 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { UserData } from './../customer-dashboard/customer-dashboard.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
 import { FemsDialogComponent } from '../fems-dialog/fems-dialog.component';

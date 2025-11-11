@@ -9,11 +9,13 @@ import { DashboardDataService } from './../services/dashboard-data.service';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatTable, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { throwMatDialogContentAlreadyAttachedError } from '@angular/material/dialog';
 import * as Highcharts from 'highcharts';
 //import {MatPaginator} from '@angular/material';
 // import { MatSort } from '@angular/material/sort';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable, interval, from } from 'rxjs';
 import { formatDate, getLocaleDayNames } from '@angular/common';
 import { Router } from '@angular/router';
@@ -80,10 +82,10 @@ export class WhMeteringComponent implements OnInit {
 
     selected_graph = '0';
     selected_task = '0';
-    date = new FormControl(new Date());
-    loadDate = new FormControl(new Date());
-    dgFuelDate = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString().substring(0, 10));
+    date = new UntypedFormControl(new Date());
+    loadDate = new UntypedFormControl(new Date());
+    dgFuelDate = new UntypedFormControl(new Date());
+    serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0, 10));
     whichGraph = 1;
     loadGraph: Boolean = true;
     seprateManinsDgLoad: Boolean = false;

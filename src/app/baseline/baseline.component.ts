@@ -1,7 +1,9 @@
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { UserData } from './../customer-dashboard/customer-dashboard.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { DataTableItem, DataTableDataSource } from '../super-admin/data-table-datasource';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
@@ -11,7 +13,7 @@ import * as Highcharts from 'highcharts';
 import { DataService } from './../services/data.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
-import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -33,8 +35,8 @@ export class BaselineComponent implements OnInit {
   filterDate: string;
   picker1: Date;
   picker2: Date;
-  date = new FormControl(new Date());
-  serializedDate = new FormControl((new Date()).toISOString().substring(0, 10));
+  date = new UntypedFormControl(new Date());
+  serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0, 10));
 
   aisleGroupName: string;
   dashboardType: string;

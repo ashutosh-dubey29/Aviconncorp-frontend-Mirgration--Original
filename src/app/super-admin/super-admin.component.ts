@@ -10,14 +10,14 @@ import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren, QueryList } 
 // import { MatPaginator, MatSort, MatTableDataSource, MatTable } from '@angular/material';
 import * as Highcharts from 'highcharts';
 
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 //--------------------new---------------------------------
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { MatSort } from '@angular/material';
-import { MatTable } from '@angular/material/table';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 //----------------------------------------------------------
 
 
@@ -67,8 +67,8 @@ export class SuperAdminComponent {
   }
   selected = '0';
   selected_task = '0';
-  date = new FormControl(new Date());
-  serializedDate = new FormControl((new Date()).toISOString());
+  date = new UntypedFormControl(new Date());
+  serializedDate = new UntypedFormControl((new Date()).toISOString());
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

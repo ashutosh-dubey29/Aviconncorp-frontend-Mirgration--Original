@@ -4,7 +4,9 @@ import { CustomerDetailsModel } from './../models/user';
 import { UserService } from './../services/user.service';
 import { DataService } from './../services/data.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { from } from 'rxjs';
 import * as Highcharts from 'highcharts';
 @Component({

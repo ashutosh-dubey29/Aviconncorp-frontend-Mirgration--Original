@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'

@@ -8,11 +8,12 @@ import { LoginComponent } from './../login/login.component';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import * as Highcharts from 'highcharts';
 //import {MatPaginator} from '@angular/material';
 import { MatSort } from '@angular/material/sort';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 // import {formatDate} from '@angular/common';
@@ -65,8 +66,8 @@ export class WarehouseComponent implements OnInit {
 
   selected_graph = '0';
   selected_task = '0';
-  date = new FormControl(new Date());
-  serializedDate = new FormControl((new Date()).toISOString().substring(0, 10));
+  date = new UntypedFormControl(new Date());
+  serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0, 10));
   filterDate: string;
   picker1: Date;
   dashboardType: string;

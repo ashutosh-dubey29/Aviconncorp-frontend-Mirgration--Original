@@ -1,10 +1,13 @@
 import { from } from 'rxjs';
 import { DataService } from './../services/data.service';
 import { Album } from './../models/user';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource, MatSlideToggleChange, MatSlideToggle} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { MovieService } from '../services/movie.service';
 import {chart} from 'highcharts';
 import * as Highcharts from 'highcharts';
@@ -20,20 +23,20 @@ export class AdminComponent implements OnInit {
   show:Boolean = false;
   dataSource: MatTableDataSource<any>;
   checked:Boolean
-  userData : FormGroup;
-  date = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString().substring(0, 10));
+  userData : UntypedFormGroup;
+  date = new UntypedFormControl(new Date());
+    serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0, 10));
   displayedColumns = ['id', 'userId', 'title']
   // displayedColumns = ["custId","custUserName","custEmail"]
-  form:FormGroup;
-  data:FormGroup;
+  form:UntypedFormGroup;
+  data:UntypedFormGroup;
   showModal:Boolean=false;
   lineChartOptions:any;
   gaugeOptions:any;
   Highcharts = Highcharts;
   siteId;
   // SolidGaugeChart=SolidGaugeChart;
-  constructor(private UserService:UserService,private dataService:DataService, private fb:FormBuilder, private album:MovieService) { 
+  constructor(private UserService:UserService,private dataService:DataService, private fb:UntypedFormBuilder, private album:MovieService) { 
     this.userData = this.fb.group({
       countryName: ['', Validators.required],
       stateName: [(''), Validators.required],
@@ -78,8 +81,8 @@ export class AdminComponent implements OnInit {
 
  
 
-  get albums(): FormArray {
-    return this.form.get('albums') as FormArray;
+  get albums(): UntypedFormArray {
+    return this.form.get('albums') as UntypedFormArray;
   }
   submit(){
     let data = {"data": this.form.value}
@@ -92,7 +95,7 @@ export class AdminComponent implements OnInit {
     console.log("data is:- ",this.form.value)
   }
   // On user change I clear the title of that album 
-  onUserChange(event, album: FormGroup) {
+  onUserChange(event, album: UntypedFormGroup) {
     const title = album.get('title');
   
     title.setValue(null);

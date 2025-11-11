@@ -9,9 +9,9 @@ import { DataService } from './../services/data.service';
 import { GlobalService } from './../services/global.service';
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { User } from '../models/user';
 import { resetpassword } from '../models/resetpassword';
 
@@ -24,7 +24,7 @@ import { resetpassword } from '../models/resetpassword';
 })
 
 export class LoginComponent implements OnInit {
-  userLogin: FormGroup;
+  userLogin: UntypedFormGroup;
   loading: boolean;
   adminDashboard: string;
   dashbaordData;
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   options: any;
   subject: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private userService: UserService, public dialog: MatDialog,
+  constructor(private fb: UntypedFormBuilder, private router: Router, private userService: UserService, public dialog: MatDialog,
     private global: GlobalService, private data: DataService, private dashData: DashboardDataService,
   ) {
     this.userLogin = this.fb.group({

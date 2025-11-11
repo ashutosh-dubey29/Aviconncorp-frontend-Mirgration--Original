@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { Inject} from '@angular/core';
 import { DataService } from '../services/data.service';
 export interface DialogData {
@@ -24,12 +24,12 @@ export class ExcelsheetComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private dataService:DataService,) { }
 
     siteId= localStorage.getItem('siteId');
-    date = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString().substring(0,10));
+    date = new UntypedFormControl(new Date());
+    serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0,10));
     
-      excelDataForm = new FormGroup({
-      startDate: new FormControl(''),
-      endDate: new FormControl(''),
+      excelDataForm = new UntypedFormGroup({
+      startDate: new UntypedFormControl(''),
+      endDate: new UntypedFormControl(''),
 
     });
 

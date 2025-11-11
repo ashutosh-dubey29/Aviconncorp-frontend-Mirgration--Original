@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormGroup, FormControl,Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl,Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
 
 export interface DialogData {
@@ -26,9 +26,9 @@ export class AddDevtypeDialogComponent implements OnInit {
      
       siteId= localStorage.getItem('siteId');
      
-      devTypeDataForm = new FormGroup({
-      deviceName: new FormControl(''),
-      category: new FormControl(''),
+      devTypeDataForm = new UntypedFormGroup({
+      deviceName: new UntypedFormControl(''),
+      category: new UntypedFormControl(''),
 
     });
 

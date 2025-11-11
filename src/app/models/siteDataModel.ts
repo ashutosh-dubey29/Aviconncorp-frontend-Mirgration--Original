@@ -1,4 +1,4 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 export class SiteDetailsModel {
     site_id: number;
@@ -38,14 +38,14 @@ export class BaselineData{
     ExpectedConsump: string;
     CurrentConsump: string;
    
-    static asFormGroup(baselineData: BaselineData):FormGroup{
-      const fg = new FormGroup({
-        serialNo: new FormControl(baselineData.serialNo,Validators.required),
-        AisleGroup: new FormControl(baselineData.AisleGroup,Validators.required), 
-        TotalLights: new FormControl(baselineData.TotalLights,Validators.required), 
-        wattage1Light: new FormControl(baselineData.wattage1Light,Validators.required), 
-        ExpectedConsump: new FormControl(baselineData.ExpectedConsump,Validators.required), 
-        CurrentConsump: new FormControl(baselineData.CurrentConsump,Validators.required) 
+    static asFormGroup(baselineData: BaselineData):UntypedFormGroup{
+      const fg = new UntypedFormGroup({
+        serialNo: new UntypedFormControl(baselineData.serialNo,Validators.required),
+        AisleGroup: new UntypedFormControl(baselineData.AisleGroup,Validators.required), 
+        TotalLights: new UntypedFormControl(baselineData.TotalLights,Validators.required), 
+        wattage1Light: new UntypedFormControl(baselineData.wattage1Light,Validators.required), 
+        ExpectedConsump: new UntypedFormControl(baselineData.ExpectedConsump,Validators.required), 
+        CurrentConsump: new UntypedFormControl(baselineData.CurrentConsump,Validators.required) 
       });
       return fg;
     }

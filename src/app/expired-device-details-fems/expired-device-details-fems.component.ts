@@ -4,7 +4,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angula
 import { Router } from '@angular/router';
 import {MatTable} from '@angular/material/table';
 import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-import {MatPaginator,  MatSort, MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { DataTableItem } from '../super-admin/data-table-datasource';
 
 export class DialogData{
