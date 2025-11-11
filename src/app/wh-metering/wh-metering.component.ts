@@ -22,8 +22,12 @@ import { formatDate, getLocaleDayNames } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
-import { chart } from 'highcharts';
 // import * as solidGauge from 'highcharts/modules/solid-gauge.src';
+import { chart } from 'highcharts';
+declare var require: any;
+const Boost = require('highcharts/modules/boost');
+const noData = require('highcharts/modules/no-data-to-display');
+const More = require('highcharts/highcharts-more');
 import { ExcelsheetComponent } from '../excelsheet/excelsheet.component';
 import { PfTableComponent } from '../pf-table/pf-table.component';
 // import { LightsWattDataComponent } from '../lights-watt-data/lights-watt-data.component';
@@ -112,10 +116,22 @@ export class WhMeteringComponent implements OnInit {
     show_dg_mains_run_time: any;
     liveData = new LiveMeteringDataModel();
     loading = true;
-    updateFlag: boolean = false;
+    // legacy flag used throughout the code; we expose a getter/setter so older
+    // assignments `this.updateFlag = true` will toggle the wrapper's update signal.
+    private _updateFlag = false;
     updateLoadDataFlag: boolean = false;
     Highcharts = Highcharts;
     pieChart = Highcharts;
+    // wrapper update toggle used by the standalone component
+    chartUpdateFlag = false;
+    // modules to pass into the standalone wrapper
+    hcModules: Array<any> = [Boost, noData, More];
+
+    get updateFlag(): boolean { return this._updateFlag; }
+    set updateFlag(val: boolean) {
+        if (val) this.chartUpdateFlag = !this.chartUpdateFlag;
+        this._updateFlag = val;
+    }
     public pieChartOptions: any;
     barChartOptions: any;
     chartConstructor: string = 'chart';
