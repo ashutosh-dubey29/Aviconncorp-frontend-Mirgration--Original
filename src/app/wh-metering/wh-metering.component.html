@@ -390,7 +390,7 @@
 
                 <div class="chart-body" *ngIf="loadGraph">
 
-                    <app-highcharts #loadChart [options]="lineChartOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" [oneToOne]="true" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <app-highcharts #loadChart [options]="lineChartOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" [isOneToOne]="true" style="width: 100%; height: 100%; display: block;"></app-highcharts>
 
                     <div class="row">
                         <div class="col-8"></div>
@@ -406,7 +406,7 @@
 
                 <div class="chart-body" *ngIf="seprateManinsDgLoad">
 
-                    <app-highcharts [options]="seprateManinsDgLoadChartOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" [oneToOne]="true" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <app-highcharts [options]="seprateManinsDgLoadChartOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" [isOneToOne]="true" style="width: 100%; height: 100%; display: block;"></app-highcharts>
 
                     <div class="row">
                         <div class="col-8"></div>
@@ -435,7 +435,7 @@
                 </div>
                 <div class="chart-body">
 
-                    <app-highcharts [options]="lineChartOption" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [oneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <app-highcharts [options]="lineChartOption" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                 </div>
 
             </div>
@@ -487,7 +487,7 @@
                     </div>
                 </div>
                 <div class="chart-body" *ngIf="unitConsumptionGraph">
-                    <app-highcharts [options]="barChartOptions" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [oneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <app-highcharts [options]="barChartOptions" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                     <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4"><button class="md-raised md-primary md-button md-link-ripple" type="button"
@@ -504,7 +504,7 @@
                 </div>
 
                 <div class="chart-body" *ngIf="runTimeGraph">
-                    <app-highcharts [options]="barChartOptionsRunTime" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [oneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <app-highcharts [options]="barChartOptionsRunTime" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                     <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4">

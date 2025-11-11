@@ -23,6 +23,15 @@ export class HighchartsStandaloneComponent implements AfterViewInit, OnChanges, 
   @Input() modules: Array<((hc: typeof Highcharts) => void) | null> | null = null;
   @Input() constructorType: string | null = null; // 'stockChart' | 'chart'
   @Input() updateFlag = false;
+  // Accept legacy `oneToOne` binding used throughout older templates.
+  // Note: Angular blocks bindings that look like event handlers (names starting
+  // with "on"), so declaring this as an @Input ensures the binding is
+  // recognized as a component input and allowed by the compiler/runtime.
+  @Input('oneToOne') oneToOne: boolean | null = null;
+  // New, safe alias that avoids starting with 'on' (which Angular treats as event-like).
+  @Input('oneToOneInput') oneToOneInput: boolean | null = null;
+  // Safe boolean input that avoids the 'on' prefix security check.
+  @Input('isOneToOne') isOneToOne: boolean | null = null;
 
   private chart?: Highcharts.Chart;
 

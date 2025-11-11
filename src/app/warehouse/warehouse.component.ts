@@ -8,8 +8,8 @@ import { LoginComponent } from './../login/login.component';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource, MatLegacyTable as MatTable } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import * as Highcharts from 'highcharts';
 //import {MatPaginator} from '@angular/material';
 import { MatSort } from '@angular/material/sort';

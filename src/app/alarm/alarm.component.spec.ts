@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlarmComponent } from './alarm.component';
 

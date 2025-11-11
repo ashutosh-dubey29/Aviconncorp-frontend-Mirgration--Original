@@ -9,8 +9,6 @@ import { DashboardDataService } from './../services/dashboard-data.service';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
-import { MatLegacyTableDataSource as MatTableDataSource, MatLegacyTable as MatTable } from '@angular/material/legacy-table';
 // Note: removed use of internal throwMatDialogContentAlreadyAttachedError which is no longer exported
 // from Angular Material in v16.
 import * as Highcharts from 'highcharts';
@@ -20,7 +18,10 @@ import { UntypedFormControl } from '@angular/forms';
 import { Observable, interval, from } from 'rxjs';
 import { formatDate, getLocaleDayNames } from '@angular/common';
 import { Router } from '@angular/router';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
 // import * as solidGauge from 'highcharts/modules/solid-gauge.src';
 import { chart } from 'highcharts';
