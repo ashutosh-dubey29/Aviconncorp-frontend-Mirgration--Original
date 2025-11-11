@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -77,7 +76,6 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
 
 @NgModule({
   declarations: [
-    AppComponent,
     LoginComponent,
     DialogOverComponent,
     DashboardComponent,
@@ -111,7 +109,7 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
   ],
   exports: [MatDialogModule
   ],
-  bootstrap: [AppComponent], imports: [BrowserModule,
+  imports: [BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
