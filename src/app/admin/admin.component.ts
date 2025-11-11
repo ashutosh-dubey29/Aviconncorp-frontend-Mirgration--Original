@@ -4,7 +4,7 @@ import { Album } from './../models/user';
 import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormArray, UntypedFormControl } from '@angular/forms';
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatLegacySlideToggleChange as MatSlideToggleChange, MatLegacySlideToggle as MatSlideToggle } from '@angular/material/legacy-slide-toggle';

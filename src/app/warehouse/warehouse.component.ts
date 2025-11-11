@@ -19,7 +19,7 @@ import { from } from 'rxjs';
 // import {formatDate} from '@angular/common';
 import { formatDate, getLocaleDayNames } from '@angular/common';
 import { SiteDetailsModel, LiveMeteringDataModel } from './../models/siteDataModel';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
 import { Router } from '@angular/router';
 import { preserveWhitespacesDefault } from '@angular/compiler';
