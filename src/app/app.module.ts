@@ -72,7 +72,6 @@ import { LoadDataTableComponent } from './load-data-table/load-data-table.compon
 import { CustomDateRangePickerComponent } from './custom-date-range-picker/custom-date-range-picker.component';
 import { DgFuelExcelExportComponent } from './dg-fuel-excel-export/dg-fuel-excel-export.component';
 import { SubmeteringComponent } from './submetering/submetering.component';
-import { HighchartsShimDirective } from './testing/highcharts-shim.directive';
 import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalone.component';
 
 
@@ -108,8 +107,7 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
     LoadDataTableComponent,
     CustomDateRangePickerComponent,
     DgFuelExcelExportComponent,
-    SubmeteringComponent,
-    HighchartsShimDirective,
+  SubmeteringComponent,
   ],
   exports: [MatDialogModule
   ],

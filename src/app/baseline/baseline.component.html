@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="chart-body">
-                <highcharts-chart
+                <app-highcharts
                     [Highcharts]="Highcharts"
                     [constructorType]="chartConstructor"
                     [options]="barChartOptions"
@@ -36,7 +36,7 @@
                     [isOneToOne]="oneToOneFlag"
             
                     style="width: 100%; height: 100%; display: block;"
-                ></highcharts-chart>
+                ></app-highcharts>
                 <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4"><button class="md-raised md-primary md-button md-link-ripple" type="button" style="float: right;" (click)="changeGraphStacking()">

@@ -217,7 +217,7 @@
                    </div>
                    <div class="chart-body">
                     
-                        <highcharts-chart
+                        <app-highcharts
                             [Highcharts]="Highcharts"
                             [constructorType]="chartConstructor"
                             [options]="lineChartOptions"
@@ -226,7 +226,7 @@
                             [isOneToOne]="oneToOneFlag"
                     
                             style="width: 100%; height: 100%; display: block;"
-                        ></highcharts-chart>
+                        ></app-highcharts>
                 </div>
                </div>               
            </div>
@@ -274,7 +274,7 @@
                     </div>
                 </div>
                 <div class="chart-body" *ngIf="showDailygraph">
-                    <highcharts-chart #chart 
+                    <app-highcharts #chart 
                         [Highcharts]="Highcharts"
                         [constructorType]="chartConstructor"
                         [options]="barChartOptions"
@@ -284,10 +284,10 @@
                         [isOneToOne]="oneToOneFlag"
                 
                         style="width: 100%; height: 100%; display: block;"
-                    ></highcharts-chart>
+                    ></app-highcharts>
                 </div>
                     <div *ngIf="showHourlygraph">
-                        <highcharts-chart #chart
+                        <app-highcharts #chart
                         [Highcharts]="Highcharts"
                         [constructorType]="chartConstructor"
                         [options]="updatedbarChartOptions"
@@ -297,7 +297,7 @@
                         [isOneToOne]="oneToOneFlag"
                 
                         style="width: 100%; height: 100%; display: block;"
-                        ></highcharts-chart></div>  
+                        ></app-highcharts></div>  
 
                     <div class="row">
                         <div class="col-6"></div>

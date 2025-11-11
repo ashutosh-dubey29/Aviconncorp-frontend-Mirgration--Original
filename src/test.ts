@@ -24,7 +24,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import * as Highcharts from 'highcharts';
-import { HighchartsShimDirective } from './app/testing/highcharts-shim.directive';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 // First, initialize the Angular testing environment.
@@ -72,7 +71,7 @@ try {
 // Provide common testing modules/providers globally to reduce missing-provider failures
 beforeEach(() => {
   TestBed.configureTestingModule({
-    declarations: [HighchartsShimDirective],
+    declarations: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     imports: [BrowserAnimationsModule,
         ReactiveFormsModule,
