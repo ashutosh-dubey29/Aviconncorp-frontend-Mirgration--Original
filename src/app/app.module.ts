@@ -36,8 +36,11 @@ import {MatLegacyCardModule as MatCardModule} from '@angular/material/legacy-car
 
 
 /* chart library */ 
-//import Highchart in angular
-import { HighchartsChartModule } from 'highcharts-angular';
+// highcharts-angular package is incompatible with the current Ivy compiler in this
+// workspace (older ViewEngine-only distribution). We use a small local shim
+// (`HighchartsShimDirective`) declared below instead of importing the external
+// module so the app can build. Replace with the real module after updating
+// `highcharts-angular` to an Ivy/ESM-compatible release.
 
 import { ComingDashComponent } from './coming-dash/coming-dash.component';
 import { OutputGraphComponent } from './output-graph/output-graph.component';
@@ -129,7 +132,8 @@ import { HighchartsShimDirective } from './testing/highcharts-shim.directive';
         MatTableModule,
         MatSortModule,
         MatMenuModule,
-        HighchartsChartModule,
+    // HighchartsChartModule removed (see comment above). The local
+    // HighchartsShimDirective provides the `highcharts-chart` selector.
         MatDatepickerModule,
         MatNativeDateModule,
         MatSelectModule,
