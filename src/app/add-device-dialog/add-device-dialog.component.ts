@@ -22,10 +22,9 @@ export interface DialogData {
 }
 
 @Component({
-    selector: 'app-add-device-dialog',
-    templateUrl: './add-device-dialog.component.html',
-    styleUrls: ['./add-device-dialog.component.css'],
-    standalone: false
+  selector: 'app-add-device-dialog',
+  templateUrl: './add-device-dialog.component.html',
+  styleUrls: ['./add-device-dialog.component.css']
 })
 export class AddDeviceDialogComponent implements OnInit {
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<AddDeviceDialogComponent>,

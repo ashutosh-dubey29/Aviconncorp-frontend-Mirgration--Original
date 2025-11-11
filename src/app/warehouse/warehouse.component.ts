@@ -38,10 +38,9 @@ export interface KeyValueIf {
 
 
 @Component({
-    selector: 'app-warehouse',
-    templateUrl: './warehouse.component.html',
-    styleUrls: ['./warehouse.component.css'],
-    standalone: false
+  selector: 'app-warehouse',
+  templateUrl: './warehouse.component.html',
+  styleUrls: ['./warehouse.component.css']
 })
 
 

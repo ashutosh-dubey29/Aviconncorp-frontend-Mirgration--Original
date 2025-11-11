@@ -14,10 +14,9 @@ export interface DialogData {
 
 
 @Component({
-    selector: 'app-add-devtype-dialog',
-    templateUrl: './add-devtype-dialog.component.html',
-    styleUrls: ['./add-devtype-dialog.component.css'],
-    standalone: false
+  selector: 'app-add-devtype-dialog',
+  templateUrl: './add-devtype-dialog.component.html',
+  styleUrls: ['./add-devtype-dialog.component.css']
 })
 
 export class AddDevtypeDialogComponent implements OnInit {

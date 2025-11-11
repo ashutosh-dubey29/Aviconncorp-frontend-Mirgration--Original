@@ -10,10 +10,9 @@ export interface DialogData {
 
 
 @Component({
-    selector: 'app-fems-dialog',
-    templateUrl: './fems-dialog.component.html',
-    styleUrls: ['./fems-dialog.component.css'],
-    standalone: false
+  selector: 'app-fems-dialog',
+  templateUrl: './fems-dialog.component.html',
+  styleUrls: ['./fems-dialog.component.css']
 })
 export class FemsDialogComponent implements OnInit {
   // animal: string;

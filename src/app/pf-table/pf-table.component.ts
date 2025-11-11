@@ -15,10 +15,9 @@ export class DialogData{
 }
 
 @Component({
-    selector: 'app-pf-table',
-    templateUrl: './pf-table.component.html',
-    styleUrls: ['./pf-table.component.css'],
-    standalone: false
+  selector: 'app-pf-table',
+  templateUrl: './pf-table.component.html',
+  styleUrls: ['./pf-table.component.css']
 })
 export class PfTableComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>; 

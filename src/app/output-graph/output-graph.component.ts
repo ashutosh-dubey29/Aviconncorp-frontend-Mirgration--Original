@@ -10,10 +10,9 @@ let noData = require('highcharts/modules/no-data-to-display');
 let More = require('highcharts/highcharts-more');
 
 @Component({
-    selector: 'app-output-graph',
-    templateUrl: './output-graph.component.html',
-    styleUrls: ['./output-graph.component.css'],
-    standalone: false
+  selector: 'app-output-graph',
+  templateUrl: './output-graph.component.html',
+  styleUrls: ['./output-graph.component.css']
 })
 export class OutputGraphComponent implements OnInit {
   lineChartOptions: any;

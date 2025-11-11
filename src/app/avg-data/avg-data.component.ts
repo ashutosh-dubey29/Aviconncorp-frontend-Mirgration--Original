@@ -12,10 +12,9 @@ export interface DialogData {
      energyConsumed:string;
 }
 @Component({
-    selector: 'app-avg-data',
-    templateUrl: './avg-data.component.html',
-    styleUrls: ['./avg-data.component.css'],
-    standalone: false
+  selector: 'app-avg-data',
+  templateUrl: './avg-data.component.html',
+  styleUrls: ['./avg-data.component.css']
 })
 
 

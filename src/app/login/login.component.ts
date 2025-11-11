@@ -16,12 +16,11 @@ import { User } from '../models/user';
 import { resetpassword } from '../models/resetpassword';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [UserService],
-    standalone: false
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [UserService],
 })
 
 export class LoginComponent implements OnInit {

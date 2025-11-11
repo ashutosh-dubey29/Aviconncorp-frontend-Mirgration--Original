@@ -11,10 +11,9 @@ export class DialogData{
 }
 
 @Component({
-    selector: 'app-dialog-switchdash',
-    templateUrl: './dialog-switchdash.component.html',
-    styleUrls: ['./dialog-switchdash.component.css'],
-    standalone: false
+  selector: 'app-dialog-switchdash',
+  templateUrl: './dialog-switchdash.component.html',
+  styleUrls: ['./dialog-switchdash.component.css']
 })
 export class DialogSwitchdashComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>; //mandeep

@@ -5,8 +5,8 @@
     "paths": {
       "@angular/material/legacy-*": ["src/patches/material-legacy-reexports/legacy-*"]
     },
+    "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
-    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
     "module": "esnext",

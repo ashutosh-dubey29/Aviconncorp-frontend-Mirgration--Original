@@ -17,10 +17,9 @@ import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnack
 
 
 @Component({
-    selector: 'app-baseline',
-    templateUrl: './baseline.component.html',
-    styleUrls: ['./baseline.component.css'],
-    standalone: false
+  selector: 'app-baseline',
+  templateUrl: './baseline.component.html',
+  styleUrls: ['./baseline.component.css']
 })
 
 export class BaselineComponent implements OnInit {

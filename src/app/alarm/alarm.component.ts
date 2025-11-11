@@ -4,10 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-    selector: 'app-alarm',
-    templateUrl: './alarm.component.html',
-    styleUrls: ['./alarm.component.css'],
-    standalone: false
+  selector: 'app-alarm',
+  templateUrl: './alarm.component.html',
+  styleUrls: ['./alarm.component.css']
 })
 export class AlarmComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

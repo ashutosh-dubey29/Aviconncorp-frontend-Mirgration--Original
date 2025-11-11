@@ -20,10 +20,9 @@ export interface EmailData {
 
 
 @Component({
-    selector: 'app-fire-pump-alarm',
-    templateUrl: './fire-pump-alarm.component.html',
-    styleUrls: ['./fire-pump-alarm.component.css'],
-    standalone: false
+  selector: 'app-fire-pump-alarm',
+  templateUrl: './fire-pump-alarm.component.html',
+  styleUrls: ['./fire-pump-alarm.component.css']
 })
 
 
