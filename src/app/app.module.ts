@@ -25,17 +25,17 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
-import { MatLegacyTableModule as MatTableModule }  from '@angular/material/legacy-table';
+import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
 import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
-import {MatLegacyRadioModule as MatRadioModule} from '@angular/material/legacy-radio';
-import {MatLegacyCardModule as MatCardModule} from '@angular/material/legacy-card';
+import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio';
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 
 
 
-/* chart library */ 
+/* chart library */
 // highcharts-angular package is incompatible with the current Ivy compiler in this
 // workspace (older ViewEngine-only distribution). We use a small local shim
 // (`HighchartsShimDirective`) declared below instead of importing the external
@@ -49,10 +49,10 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
 import { WhMeteringComponent } from './wh-metering/wh-metering.component';
 import { BaselineComponent } from './baseline/baseline.component';
 import { DialogSwitchdashComponent } from './dialog-switchdash/dialog-switchdash.component';
-import {MatLegacySnackBarModule as MatSnackBarModule,MatLegacySnackBarConfig as MatSnackBarConfig,MatLegacySnackBarHorizontalPosition as MatSnackBarHorizontalPosition,MatLegacySnackBarVerticalPosition as MatSnackBarVerticalPosition,} from '@angular/material/legacy-snack-bar';
+import { MatLegacySnackBarModule as MatSnackBarModule, MatLegacySnackBarConfig as MatSnackBarConfig, MatLegacySnackBarHorizontalPosition as MatSnackBarHorizontalPosition, MatLegacySnackBarVerticalPosition as MatSnackBarVerticalPosition, } from '@angular/material/legacy-snack-bar';
 import { AdminComponent } from './admin/admin.component';
 import { AlarmComponent } from './alarm/alarm.component';
-import {MatLegacySlideToggleModule as MatSlideToggleModule} from '@angular/material/legacy-slide-toggle';
+import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
 import * as more from 'highcharts/highcharts-more.src';
 import * as solidGauge from 'highcharts/modules/solid-gauge.src';
 import { FirePumpAlarmComponent } from './fire-pump-alarm/fire-pump-alarm.component';
@@ -76,75 +76,77 @@ import { HighchartsShimDirective } from './testing/highcharts-shim.directive';
 import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalone.component';
 
 
-@NgModule({ declarations: [
-        AppComponent,
-        LoginComponent,
-        DialogOverComponent,
-        DashboardComponent,
-        SuperAdminComponent,
-        ComingDashComponent,
-        OutputGraphComponent,
-        CustomerDashboardComponent,
-        WarehouseComponent,
-        WhMeteringComponent,
-        BaselineComponent,
-        DialogSwitchdashComponent,
-        AdminComponent,
-        AlarmComponent,
-        FirePumpAlarmComponent,
-        FemsComponent,
-        AddDeviceDialogComponent,
-        FemsDialogComponent,
-        AddDevtypeDialogComponent,
-        LightsWattDataComponent,
-        FanswattdataComponent,
-        DeviceDetailsFemsComponent,
-        ExpiredDeviceDetailsFemsComponent,
-        AvgDataComponent,
-        ExcelsheetComponent,
-        LoadGraphComponent,
-        PfTableComponent,
-        LoadDataTableComponent,
-        CustomDateRangePickerComponent,
-        DgFuelExcelExportComponent,
-        SubmeteringComponent,
-        HighchartsShimDirective,
-    ],
-    exports: [MatDialogModule
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        FormsModule,
-        AppRoutingModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatIconModule,
-        MatGridListModule,
-        LayoutModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatListModule,
-        MatDialogModule,
-        MatPaginatorModule,
-        MatProgressSpinnerModule,
-        MatTableModule,
-        MatSortModule,
-        MatMenuModule,
-        HighchartsStandaloneComponent,
-        // HighchartsChartModule removed (see comment above). The local
-        // HighchartsShimDirective provides the `highcharts-chart` selector.
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSelectModule,
-        MatSnackBarModule,
-        MatRadioModule,
-        MatCardModule,
-        MatSlideToggleModule], providers: [
-        GlobalService,
-        ModalService,
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DialogOverComponent,
+    DashboardComponent,
+    SuperAdminComponent,
+    ComingDashComponent,
+    OutputGraphComponent,
+    CustomerDashboardComponent,
+    WarehouseComponent,
+    WhMeteringComponent,
+    BaselineComponent,
+    DialogSwitchdashComponent,
+    AdminComponent,
+    AlarmComponent,
+    FirePumpAlarmComponent,
+    FemsComponent,
+    AddDeviceDialogComponent,
+    FemsDialogComponent,
+    AddDevtypeDialogComponent,
+    LightsWattDataComponent,
+    FanswattdataComponent,
+    DeviceDetailsFemsComponent,
+    ExpiredDeviceDetailsFemsComponent,
+    AvgDataComponent,
+    ExcelsheetComponent,
+    LoadGraphComponent,
+    PfTableComponent,
+    LoadDataTableComponent,
+    CustomDateRangePickerComponent,
+    DgFuelExcelExportComponent,
+    SubmeteringComponent,
+    HighchartsShimDirective,
+  ],
+  exports: [MatDialogModule
+  ],
+  bootstrap: [AppComponent], imports: [BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AppRoutingModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatGridListModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatMenuModule,
+    HighchartsStandaloneComponent,
+    // HighchartsChartModule removed (see comment above). The local
+    // HighchartsShimDirective provides the `highcharts-chart` selector.
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatRadioModule,
+    MatCardModule,
+    MatSlideToggleModule], providers: [
+      GlobalService,
+      ModalService,
+      provideHttpClient(withInterceptorsFromDi()),
+    ]
+})
 
 export class AppModule { }
