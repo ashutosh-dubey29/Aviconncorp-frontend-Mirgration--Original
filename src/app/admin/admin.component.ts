@@ -32,7 +32,7 @@ import { formatDate } from '@angular/common';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatTableModule, MatPaginatorModule, MatSortModule, MatSlideToggleModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatDialogModule, HighchartsStandaloneComponent]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatTableModule, MatPaginatorModule, MatSortModule, MatSlideToggleModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatDialogModule]
 })
 export class AdminComponent implements OnInit {
   show:Boolean = false;

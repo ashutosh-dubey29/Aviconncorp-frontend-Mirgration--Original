@@ -25,7 +25,7 @@ import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdas
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone: true,
-  imports: [CommonModule, AppModule, CustomerDashboardComponent, WarehouseComponent, BaselineComponent, AdminComponent, HighchartsStandaloneComponent]
+  imports: [CommonModule, AppModule, CustomerDashboardComponent, WarehouseComponent, BaselineComponent, AdminComponent]
 })
 export class DashboardComponent implements OnInit {
   isSupperAdmin = true;

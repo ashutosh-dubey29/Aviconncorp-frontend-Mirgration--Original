@@ -161,9 +161,9 @@ import { HighchartsStandaloneComponent } from './highcharts/highcharts-standalon
     MatProgressSpinnerModule,
     MatTableModule,
     MatSortModule,
-    MatMenuModule,
+  MatMenuModule,
   HighchartsStandaloneComponent,
-    // HighchartsChartModule removed (see comment above). The local
+  // HighchartsChartModule removed (see comment above). The local
     // HighchartsShimDirective provides the `highcharts-chart` selector.
     MatDatepickerModule,
     MatNativeDateModule,
