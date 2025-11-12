@@ -1,0 +1,4 @@
+{
+  "categories": ["00:00","01:00","02:00"],
+  "series": [{ "name": "Mains", "data": [48,52,49] }, { "name": "Solar", "data": [2,3,1] }]
+}

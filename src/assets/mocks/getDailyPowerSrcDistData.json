@@ -1,0 +1,4 @@
+{
+  "categories": ["Mains","DG","Solar"],
+  "series": [{ "name": "Share", "data": [55,35,10] }]
+}
