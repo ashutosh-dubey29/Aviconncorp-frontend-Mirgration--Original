@@ -96,6 +96,78 @@ export class MockApiInterceptor implements HttpInterceptor {
       return of(new HttpResponse({ status: 200, body: { points } }));
     }
 
+    // Power source distribution endpoints
+    if (relative.startsWith('getPowerSrcDistData') || relative.startsWith('getDailyPowerSrcDistData') || relative.startsWith('getDailyPowerSrcDistDataTime') || relative.startsWith('getHourlyPowerSrcDistDataTime') || relative.startsWith('getHourlyPowerSrcDistData')) {
+      const body = {
+        categories: ['Mains','DG','Solar'],
+        series: [
+          { name: 'Mains', data: [60, 58, 62] },
+          { name: 'DG', data: [30, 33, 28] },
+          { name: 'Solar', data: [10, 9, 10] }
+        ]
+      };
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    // Inventory endpoints
+    if (relative.startsWith('saveInventoryData') || relative.startsWith('editInventoryData') || relative.startsWith('deleteInventoryData')) {
+      return of(new HttpResponse({ status: 200, body: { status: 'ok' } }));
+    }
+
+    // Fire device endpoints
+    if (relative.startsWith('fireDevicefetchdata')) {
+      const body = [{ id: 1, name: 'Fire Pump 1', status: 'ok' }];
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    if (relative.startsWith('fireDeviceTypefetch')) {
+      const body = [{ id: 1, type: 'Pump' }, { id: 2, type: 'Sensor' }];
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    if (relative.startsWith('fireDeviceTypeAdd')) {
+      return of(new HttpResponse({ status: 200, body: { status: 'created' } }));
+    }
+
+    // Snapshot API
+    if (relative.startsWith('snapShotApi') || relative.startsWith('fireDeviceSnapshotApi')) {
+      const body = { snapshot: { uptime: 12345, load: 55 } };
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    // Lights / Fans endpoints
+    if (relative.startsWith('lightsDataApi') || relative.startsWith('FansDataApi')) {
+      const body = { series: [{ name: 'Load', data: [5,6,7,5,6] }], categories: ['A','B','C','D','E'] };
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    // Expired devices / avg data
+    if (relative.startsWith('expireddevicesList')) {
+      return of(new HttpResponse({ status: 200, body: [] }));
+    }
+
+    if (relative.startsWith('avgData')) {
+      return of(new HttpResponse({ status: 200, body: { avg: 12.34 } }));
+    }
+
+    // Excel / download endpoints: return a small blob
+    if (relative.toLowerCase().includes('download') || relative.toLowerCase().includes('excel') || relative.startsWith('downloadExcelLoadData') || relative.includes('dgFuelDataExcelExport') || relative.includes('downloadExcelPFData') || relative.includes('downloadExcelMonthlyMinMaxData')) {
+      const blob = new Blob(["mock-excel-content"], { type: 'application/octet-stream' });
+      return of(new HttpResponse({ status: 200, body: blob }));
+    }
+
+    // Power factor / monthly stats
+    if (relative.startsWith('fluctuatedPowerFactorData') || relative.startsWith('monthlyMinMaxLoadData')) {
+      const body = { series: [{ name: 'PF', data: [0.95,0.96,0.94] }], months: ['Oct','Nov','Dec'] };
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    // DG fuel endpoints
+    if (relative.startsWith('dgFuelConsumptionData') || relative.startsWith('fetchDGFuelDataCustomeRange') || relative.startsWith('dgFuelMonthlyTrend')) {
+      const body = { series: [{ name: 'Fuel (L)', data: [100, 120, 110] }], categories: ['Jan','Feb','Mar'] };
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
     // Add other mocked endpoints here as needed. Default: pass-through.
     return next.handle(req);
   }
