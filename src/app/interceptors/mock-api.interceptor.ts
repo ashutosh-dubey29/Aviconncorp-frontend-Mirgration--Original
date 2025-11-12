@@ -48,6 +48,54 @@ export class MockApiInterceptor implements HttpInterceptor {
       return of(new HttpResponse({ status: 200, body }));
     }
 
+    // Mock customer/site list used by many dashboards
+    if (relative.startsWith('getCustomerSites') || relative.startsWith('getCustomerSites/')) {
+      const body = [
+        { site_id: 1, site_name: 'Mock Site A', customer: 'Mock Customer' },
+        { site_id: 2, site_name: 'Mock Site B', customer: 'Mock Customer' }
+      ];
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    // Mock site details
+    if (relative.startsWith('site-details')) {
+      const body = {
+        id: 1,
+        name: 'Mock Site A',
+        address: '123 Mock St',
+        timezone: 'UTC',
+        meters: [{ id: 'M1', name: 'Main Meter' }]
+      };
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    // Mock chart/graph endpoints (daily/hourly consumption)
+    if (relative.startsWith('getSiteDailyConsumptionData') || relative.startsWith('getSiteHourlyConsumptionData') || relative.startsWith('getSiteHourlyConsumptionData/')) {
+      const body = {
+        categories: ['00:00','01:00','02:00','03:00','04:00','05:00'],
+        series: [
+          { name: 'Energy (kWh)', data: [10, 12, 9, 8, 11, 13] }
+        ]
+      };
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    // Mock baseline/fetchBaseline
+    if (relative.startsWith('fetchBaseline') || relative.startsWith('saveBaseline')) {
+      const body = { baseline: [{ date: '2025-11-01', value: 100 }], status: 'ok' };
+      return of(new HttpResponse({ status: 200, body }));
+    }
+
+    // Mock live data endpoints used by live graphs
+    if (relative.startsWith('liveDataLoadGraph') || relative.startsWith('liveDataEverySecond') || relative.includes('liveLoadData')) {
+      const now = Date.now();
+      const points = [] as any[];
+      for (let i = 0; i < 10; i++) {
+        points.push({ ts: now - (9 - i) * 1000, value: Math.round(50 + Math.random() * 10) });
+      }
+      return of(new HttpResponse({ status: 200, body: { points } }));
+    }
+
     // Add other mocked endpoints here as needed. Default: pass-through.
     return next.handle(req);
   }
