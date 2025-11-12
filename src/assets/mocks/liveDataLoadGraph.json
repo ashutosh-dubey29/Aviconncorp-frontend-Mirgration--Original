@@ -1,0 +1,9 @@
+{
+  "points": [
+    { "ts": 0, "value": 52 },
+    { "ts": 1, "value": 50 },
+    { "ts": 2, "value": 55 },
+    { "ts": 3, "value": 54 },
+    { "ts": 4, "value": 51 }
+  ]
+}
