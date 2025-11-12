@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 /**
@@ -12,6 +12,22 @@ import { environment } from 'src/environments/environment';
  */
 @Injectable()
 export class MockApiInterceptor implements HttpInterceptor {
+  private loadJsonFixture(name: string, fallback: any): Observable<HttpResponse<any>> {
+    return from(fetch('/assets/mocks/' + name + '.json')
+      .then(r => r.ok ? r.json() : fallback)
+      .then(body => new HttpResponse({ status: 200, body }))
+    );
+  }
+
+  private loadBlobFixture(name: string, fallbackContent: string): Observable<HttpResponse<any>> {
+    return from(fetch('/assets/mocks/' + name + '.json')
+      .then(r => {
+        if (r.ok) return r.json().then(j => new Blob([JSON.stringify(j)], { type: 'application/octet-stream' }));
+        return new Blob([fallbackContent], { type: 'application/octet-stream' });
+      })
+      .then(blob => new HttpResponse({ status: 200, body: blob }))
+    );
+  }
   private isMockEnabled(): boolean {
     try {
       if (typeof window !== 'undefined') {
@@ -42,10 +58,17 @@ export class MockApiInterceptor implements HttpInterceptor {
 
     // Example: mock tokens endpoint
     if (relative.startsWith('tokens')) {
-      const body = [
-        { id: 1, token: 'mock-token-123', user: 'mock-user', expires: null }
-      ];
-      return of(new HttpResponse({ status: 200, body }));
+      // Try to load a fixture from assets first so teams can edit mock data.
+      return from(fetch('/assets/mocks/tokens.json')
+        .then(r => r.ok ? r.json() : null)
+        .then(body => {
+          if (body) return new HttpResponse({ status: 200, body });
+          const canned = [
+            { id: 1, token: 'mock-token-123', user: 'mock-user', expires: null }
+          ];
+          return new HttpResponse({ status: 200, body: canned });
+        })
+      );
     }
 
     // Mock customer/site list used by many dashboards
@@ -54,7 +77,7 @@ export class MockApiInterceptor implements HttpInterceptor {
         { site_id: 1, site_name: 'Mock Site A', customer: 'Mock Customer' },
         { site_id: 2, site_name: 'Mock Site B', customer: 'Mock Customer' }
       ];
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('getCustomerSites', body);
     }
 
     // Mock site details
@@ -66,7 +89,7 @@ export class MockApiInterceptor implements HttpInterceptor {
         timezone: 'UTC',
         meters: [{ id: 'M1', name: 'Main Meter' }]
       };
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('site-details', body);
     }
 
     // Mock chart/graph endpoints (daily/hourly consumption)
@@ -77,13 +100,13 @@ export class MockApiInterceptor implements HttpInterceptor {
           { name: 'Energy (kWh)', data: [10, 12, 9, 8, 11, 13] }
         ]
       };
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('getSiteDailyConsumptionData', body);
     }
 
     // Mock baseline/fetchBaseline
     if (relative.startsWith('fetchBaseline') || relative.startsWith('saveBaseline')) {
       const body = { baseline: [{ date: '2025-11-01', value: 100 }], status: 'ok' };
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('fetchBaseline', body);
     }
 
     // Mock live data endpoints used by live graphs
@@ -93,7 +116,7 @@ export class MockApiInterceptor implements HttpInterceptor {
       for (let i = 0; i < 10; i++) {
         points.push({ ts: now - (9 - i) * 1000, value: Math.round(50 + Math.random() * 10) });
       }
-      return of(new HttpResponse({ status: 200, body: { points } }));
+      return this.loadJsonFixture('liveDataLoadGraph', { points });
     }
 
     // Power source distribution endpoints
@@ -106,66 +129,65 @@ export class MockApiInterceptor implements HttpInterceptor {
           { name: 'Solar', data: [10, 9, 10] }
         ]
       };
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('getPowerSrcDistData', body);
     }
 
     // Inventory endpoints
     if (relative.startsWith('saveInventoryData') || relative.startsWith('editInventoryData') || relative.startsWith('deleteInventoryData')) {
-      return of(new HttpResponse({ status: 200, body: { status: 'ok' } }));
+      return this.loadJsonFixture('saveInventoryData', { status: 'ok' });
     }
 
     // Fire device endpoints
     if (relative.startsWith('fireDevicefetchdata')) {
       const body = [{ id: 1, name: 'Fire Pump 1', status: 'ok' }];
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('fireDevicefetchdata', body);
     }
 
     if (relative.startsWith('fireDeviceTypefetch')) {
       const body = [{ id: 1, type: 'Pump' }, { id: 2, type: 'Sensor' }];
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('fireDeviceTypefetch', body);
     }
 
     if (relative.startsWith('fireDeviceTypeAdd')) {
-      return of(new HttpResponse({ status: 200, body: { status: 'created' } }));
+      return this.loadJsonFixture('fireDeviceTypeAdd', { status: 'created' });
     }
 
     // Snapshot API
     if (relative.startsWith('snapShotApi') || relative.startsWith('fireDeviceSnapshotApi')) {
       const body = { snapshot: { uptime: 12345, load: 55 } };
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('snapShotApi', body);
     }
 
     // Lights / Fans endpoints
     if (relative.startsWith('lightsDataApi') || relative.startsWith('FansDataApi')) {
       const body = { series: [{ name: 'Load', data: [5,6,7,5,6] }], categories: ['A','B','C','D','E'] };
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('lightsDataApi', body);
     }
 
     // Expired devices / avg data
     if (relative.startsWith('expireddevicesList')) {
-      return of(new HttpResponse({ status: 200, body: [] }));
+      return this.loadJsonFixture('expireddevicesList', []);
     }
 
     if (relative.startsWith('avgData')) {
-      return of(new HttpResponse({ status: 200, body: { avg: 12.34 } }));
+      return this.loadJsonFixture('avgData', { avg: 12.34 });
     }
 
     // Excel / download endpoints: return a small blob
     if (relative.toLowerCase().includes('download') || relative.toLowerCase().includes('excel') || relative.startsWith('downloadExcelLoadData') || relative.includes('dgFuelDataExcelExport') || relative.includes('downloadExcelPFData') || relative.includes('downloadExcelMonthlyMinMaxData')) {
-      const blob = new Blob(["mock-excel-content"], { type: 'application/octet-stream' });
-      return of(new HttpResponse({ status: 200, body: blob }));
+      return this.loadBlobFixture('downloadExcelLoadData', 'mock-excel-content');
     }
 
     // Power factor / monthly stats
     if (relative.startsWith('fluctuatedPowerFactorData') || relative.startsWith('monthlyMinMaxLoadData')) {
       const body = { series: [{ name: 'PF', data: [0.95,0.96,0.94] }], months: ['Oct','Nov','Dec'] };
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('fluctuatedPowerFactorData', body);
     }
 
     // DG fuel endpoints
     if (relative.startsWith('dgFuelConsumptionData') || relative.startsWith('fetchDGFuelDataCustomeRange') || relative.startsWith('dgFuelMonthlyTrend')) {
       const body = { series: [{ name: 'Fuel (L)', data: [100, 120, 110] }], categories: ['Jan','Feb','Mar'] };
-      return of(new HttpResponse({ status: 200, body }));
+      return this.loadJsonFixture('dgFuelConsumptionData', body);
     }
 
     // Add other mocked endpoints here as needed. Default: pass-through.
