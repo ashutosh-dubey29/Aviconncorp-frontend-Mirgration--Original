@@ -14,7 +14,14 @@ import { environment } from 'src/environments/environment';
 export class MockApiInterceptor implements HttpInterceptor {
   private loadJsonFixture(name: string, fallback: any): Observable<HttpResponse<any>> {
     return from(fetch('/assets/mocks/' + name + '.json')
-      .then(r => r.ok ? r.json() : fallback)
+      .then(r => {
+        if (r.ok) {
+          try { console.debug(`[MockApi] Serving fixture: ${name}.json`); } catch (_) {}
+          return r.json();
+        }
+        try { console.debug(`[MockApi] Fixture not found: ${name}.json — using fallback`); } catch (_) {}
+        return fallback;
+      })
       .then(body => new HttpResponse({ status: 200, body }))
     );
   }
@@ -22,7 +29,11 @@ export class MockApiInterceptor implements HttpInterceptor {
   private loadBlobFixture(name: string, fallbackContent: string): Observable<HttpResponse<any>> {
     return from(fetch('/assets/mocks/' + name + '.json')
       .then(r => {
-        if (r.ok) return r.json().then(j => new Blob([JSON.stringify(j)], { type: 'application/octet-stream' }));
+        if (r.ok) {
+          try { console.debug(`[MockApi] Serving blob fixture: ${name}.json`); } catch (_) {}
+          return r.json().then(j => new Blob([JSON.stringify(j)], { type: 'application/octet-stream' }));
+        }
+        try { console.debug(`[MockApi] Blob fixture not found: ${name}.json — using fallback`); } catch (_) {}
         return new Blob([fallbackContent], { type: 'application/octet-stream' });
       })
       .then(blob => new HttpResponse({ status: 200, body: blob }))
@@ -48,6 +59,8 @@ export class MockApiInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
+    try { console.info('[MockApi] Mock mode enabled — intercepting requests'); } catch (_) {}
+
     const url = req.url || '';
     // Only mock API calls that target the production API base URL
     if (!url.startsWith(environment.apiUrl)) {
@@ -58,17 +71,8 @@ export class MockApiInterceptor implements HttpInterceptor {
 
     // Example: mock tokens endpoint
     if (relative.startsWith('tokens')) {
-      // Try to load a fixture from assets first so teams can edit mock data.
-      return from(fetch('/assets/mocks/tokens.json')
-        .then(r => r.ok ? r.json() : null)
-        .then(body => {
-          if (body) return new HttpResponse({ status: 200, body });
-          const canned = [
-            { id: 1, token: 'mock-token-123', user: 'mock-user', expires: null }
-          ];
-          return new HttpResponse({ status: 200, body: canned });
-        })
-      );
+      const canned = [ { id: 1, token: 'mock-token-123', user: 'mock-user', expires: null } ];
+      return this.loadJsonFixture('tokens', canned);
     }
 
     // Mock customer/site list used by many dashboards

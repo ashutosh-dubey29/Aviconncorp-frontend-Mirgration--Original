@@ -1,0 +1,4 @@
+{
+  "categories": ["Jan","Feb","Mar"],
+  "series": [{ "name": "Submeter A", "data": [10,20,15] }]
+}
