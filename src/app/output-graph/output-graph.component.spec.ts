@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
 import { OutputGraphComponent } from './output-graph.component';
 
 describe('OutputGraphComponent', () => {
@@ -8,7 +8,7 @@ describe('OutputGraphComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OutputGraphComponent ]
+      imports: [ OutputGraphComponent, HighchartsStandaloneComponent ]
     })
     .compileComponents();
   }));

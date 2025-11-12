@@ -1,4 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AlarmComponent } from './alarm.component';
 
@@ -8,7 +11,7 @@ describe('AlarmComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AlarmComponent ]
+      imports: [ AlarmComponent, MatTableModule, MatPaginatorModule, MatSortModule ]
     })
     .compileComponents();
   }));

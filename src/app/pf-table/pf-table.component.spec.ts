@@ -1,4 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { PfTableComponent } from './pf-table.component';
 
@@ -8,7 +12,7 @@ describe('PfTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PfTableComponent ]
+      imports: [ PfTableComponent, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule ]
     })
     .compileComponents();
   }));

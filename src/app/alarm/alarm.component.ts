@@ -1,12 +1,21 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { CommonModule } from '@angular/common';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-alarm',
-  templateUrl: './alarm.component.html',
-  styleUrls: ['./alarm.component.css']
+    selector: 'app-alarm',
+    templateUrl: './alarm.component.html',
+    styleUrls: ['./alarm.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, ...SHARED_MAT_MODULES]
 })
 export class AlarmComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

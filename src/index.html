@@ -1,27 +1,80 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Login to Aviconn SEM Dashboard</title>
-  <base href="./">
+  <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="assets/image/1.png">
+  <!-- Runtime diagnostics: show a friendly message if the browser doesn't support ES modules
+       and surface runtime errors so a blank page becomes debuggable for end users. -->
+  <script>
+    (function(){
+      // feature-detect ES module support (dynamic import used inside try/catch)
+      function supportsModules(){
+        try{
+          // If dynamic import is supported inside Function, assume module support
+          new Function('import(\"data:text/javascript,\" )');
+          return true;
+        }catch(e){
+          return false;
+        }
+      }
+
+      if(!supportsModules()){
+        // Visible banner for old/unsupported browsers
+        var el = document.createElement('div');
+        el.style.position = 'fixed';
+        el.style.left='0'; el.style.right='0'; el.style.top='0';
+        el.style.background='#ff5252'; el.style.color='white';
+        el.style.padding='12px'; el.style.zIndex=2147483647; el.style.fontFamily='Arial, sans-serif';
+        el.style.textAlign='center';
+        el.textContent = 'This application requires a modern browser with JavaScript module support. Please use Chrome, Edge or Firefox (latest).';
+        document.addEventListener('DOMContentLoaded', function(){ document.body.insertBefore(el, document.body.firstChild); });
+      }
+
+      // Surface runtime errors and unhandled rejections so they are visible even if console is hidden
+      function showRuntimeInfo(msg){
+        try{
+          var info = document.getElementById('runtime-info-overlay');
+          if(!info){
+            info = document.createElement('div');
+            info.id = 'runtime-info-overlay';
+            info.style.position='fixed'; info.style.bottom='0'; info.style.left='0'; info.style.right='0';
+            info.style.background='rgba(0,0,0,0.75)'; info.style.color='white'; info.style.padding='8px';
+            info.style.fontFamily='monospace'; info.style.fontSize='12px'; info.style.zIndex=2147483646; info.style.maxHeight='40vh'; info.style.overflow='auto';
+            document.addEventListener('DOMContentLoaded', function(){ document.body.appendChild(info); });
+          }
+          var p = document.createElement('div'); p.textContent = msg; info.appendChild(p);
+        }catch(err){ /* ignore overlay errors */ }
+      }
+
+      window.addEventListener('error', function(e){
+        console.error('Runtime error:', e.error || e.message || e);
+        showRuntimeInfo('Runtime error: ' + (e.message || e.error && e.error.message || e.error || e));
+      });
+      window.addEventListener('unhandledrejection', function(e){
+        console.error('Unhandled rejection:', e.reason || e);
+        showRuntimeInfo('Unhandled rejection: ' + (e.reason && (e.reason.message || e.reason) || e));
+      });
+    })();
+  </script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/540b0bcb24.js"></script>
 
-  <!-- <script src="assets/highchart/highcharts.js"></script> -->
-  <script src="https://code.highcharts.com/stock/highstock.js" ></script>
-<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
-<!-- <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script> -->
+  <!-- Bootstrap CSS (CDN) - kept as CSS only to avoid JS dependency on jQuery -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css">
+
+  <!-- Highcharts will be bundled from the npm package (import 'highcharts' in components). Removed local/CDN duplicates to avoid multiple versions being loaded. -->
 
 
-  
+
 </head>
+
 <body>
-<app-root></app-root>
+  <app-root></app-root>
 
 </body>
+
 </html>

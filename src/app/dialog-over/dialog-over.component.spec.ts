@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { DialogOverComponent } from './dialog-over.component';
 
@@ -8,7 +10,7 @@ describe('DialogOverComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogOverComponent ]
+      imports: [ DialogOverComponent, MatButtonModule, MatDialogModule ]
     })
     .compileComponents();
   }));

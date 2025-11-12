@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { Inject} from '@angular/core';
 import { DataService } from '../services/data.service';
 export interface DialogData {
@@ -12,7 +20,9 @@ export interface DialogData {
 @Component({
   selector: 'app-custom-date-range-picker',
   templateUrl: './custom-date-range-picker.component.html',
-  styleUrls: ['./custom-date-range-picker.component.css']
+  styleUrls: ['./custom-date-range-picker.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatButtonModule]
 })
 export class CustomDateRangePickerComponent implements OnInit {
 

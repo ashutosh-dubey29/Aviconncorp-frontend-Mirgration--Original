@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SuperAdminComponent } from './super-admin.component';
 
@@ -8,7 +8,7 @@ describe('SuperAdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SuperAdminComponent ]
+      imports: [ SuperAdminComponent ]
     })
     .compileComponents();
   }));

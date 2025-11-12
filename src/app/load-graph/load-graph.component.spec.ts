@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoadGraphComponent } from './load-graph.component';
 
@@ -8,7 +8,7 @@ describe('LoadGraphComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadGraphComponent ]
+      imports: [ LoadGraphComponent ]
     })
     .compileComponents();
   }));

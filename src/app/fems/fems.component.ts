@@ -1,9 +1,18 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { CommonModule } from '@angular/common';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { UserData } from './../customer-dashboard/customer-dashboard.component';
-import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogConfig as MatDialogConfig} from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FemsDialogComponent } from '../fems-dialog/fems-dialog.component';
 import {AddDeviceDialogComponent} from '../add-device-dialog/add-device-dialog.component'
 import { AddDevtypeDialogComponent } from '../add-devtype-dialog/add-devtype-dialog.component';
@@ -13,6 +22,7 @@ import { DataService } from './../services/data.service';
 import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { DeviceDetailsFemsComponent } from '../device-details-fems/device-details-fems.component';
 import { ExpiredDeviceDetailsFemsComponent } from '../expired-device-details-fems/expired-device-details-fems.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 export interface femsData{
    data:any;
    deviceCat:any;
@@ -30,9 +40,22 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'app-fems',
-  templateUrl: './fems.component.html',
-  styleUrls: ['./fems.component.css']
+    selector: 'app-fems',
+    templateUrl: './fems.component.html',
+    styleUrls: ['./fems.component.css'],
+    standalone: true,
+    imports: [
+      CommonModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      MatDialogModule,
+      MatButtonModule,
+      MatIconModule,
+      MatFormFieldModule,
+      MatInputModule,
+      ...SHARED_MAT_MODULES
+    ]
 })
 
 export class FemsComponent implements OnInit {

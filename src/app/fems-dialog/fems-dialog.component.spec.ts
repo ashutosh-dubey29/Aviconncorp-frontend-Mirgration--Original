@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 import { FemsDialogComponent } from './fems-dialog.component';
 
@@ -8,7 +10,7 @@ describe('FemsDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FemsDialogComponent ]
+      imports: [ FemsDialogComponent, MatDialogModule, MatButtonModule ]
     })
     .compileComponents();
   }));

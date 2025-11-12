@@ -1,0 +1,4 @@
+{
+  "months": ["Oct","Nov"],
+  "series": [{ "name": "MinMax", "data": [[10,20],[15,25]] }]
+}

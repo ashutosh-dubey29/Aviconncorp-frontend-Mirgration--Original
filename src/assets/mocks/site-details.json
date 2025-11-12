@@ -1,0 +1,7 @@
+{
+  "id": 1,
+  "name": "Mock Site A",
+  "address": "123 Mock St",
+  "timezone": "UTC",
+  "meters": [{ "id": "M1", "name": "Main Meter" }]
+}

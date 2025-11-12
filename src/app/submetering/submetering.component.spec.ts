@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SubmeteringComponent } from './submetering.component';
 
@@ -8,7 +8,7 @@ describe('SubmeteringComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubmeteringComponent ]
+      imports: [ SubmeteringComponent ]
     })
     .compileComponents();
   }));

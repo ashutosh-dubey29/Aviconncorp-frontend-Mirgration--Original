@@ -1,0 +1,4 @@
+{
+  "categories": ["Fan1","Fan2"],
+  "series": [{ "name": "Load", "data": [3,4] }]
+}

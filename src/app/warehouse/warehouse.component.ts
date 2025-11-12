@@ -8,9 +8,27 @@ import { LoginComponent } from './../login/login.component';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyTableDataSource as MatTableDataSource, MatLegacyTable as MatTable } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
-import * as Highcharts from 'highcharts';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 //import {MatPaginator} from '@angular/material';
 import { MatSort } from '@angular/material/sort';
 import { UntypedFormControl } from '@angular/forms';
@@ -19,7 +37,7 @@ import { from } from 'rxjs';
 // import {formatDate} from '@angular/common';
 import { formatDate, getLocaleDayNames } from '@angular/common';
 import { SiteDetailsModel, LiveMeteringDataModel } from './../models/siteDataModel';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
 import { Router } from '@angular/router';
 import { preserveWhitespacesDefault } from '@angular/compiler';
@@ -40,7 +58,9 @@ export interface KeyValueIf {
 @Component({
   selector: 'app-warehouse',
   templateUrl: './warehouse.component.html',
-  styleUrls: ['./warehouse.component.css']
+  styleUrls: ['./warehouse.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatIconModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatListModule, HighchartsStandaloneComponent, ...SHARED_MAT_MODULES]
 })
 
 

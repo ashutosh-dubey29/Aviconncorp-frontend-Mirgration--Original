@@ -1,18 +1,28 @@
 import { Component, OnInit ,Inject ,ViewChild} from '@angular/core';
-import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
+import { CommonModule } from '@angular/common';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from './../services/data.service';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { DataTableItem } from '../super-admin/data-table-datasource';
-import {MatLegacyTable as MatTable} from '@angular/material/legacy-table';
+import { MatTable } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { DialogData } from '../dialog-switchdash/dialog-switchdash.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 @Component({
-  selector: 'app-fanswattdata',
-  templateUrl: './fanswattdata.component.html',
-  styleUrls: ['./fanswattdata.component.css']
+    selector: 'app-fanswattdata',
+    templateUrl: './fanswattdata.component.html',
+    styleUrls: ['./fanswattdata.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule, ...SHARED_MAT_MODULES]
 })
 export class FanswattdataComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>; 

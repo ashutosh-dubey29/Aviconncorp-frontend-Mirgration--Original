@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { Inject} from '@angular/core';
 import { DataService } from '../services/data.service';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 export interface DialogData {
 
@@ -14,7 +21,9 @@ export interface DialogData {
 @Component({
   selector: 'app-dg-fuel-excel-export',
   templateUrl: './dg-fuel-excel-export.component.html',
-  styleUrls: ['./dg-fuel-excel-export.component.css']
+  styleUrls: ['./dg-fuel-excel-export.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule, ...SHARED_MAT_MODULES]
 })
 export class DgFuelExcelExportComponent implements OnInit {
 

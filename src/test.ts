@@ -11,20 +11,20 @@ import { TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatLegacyDialogModule as MatDialogModule, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
-import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
-import { MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import * as Highcharts from 'highcharts';
-import { HighchartsShimDirective } from './app/testing/highcharts-shim.directive';
+// Use the Highcharts ESM masters entry for tests too to keep builds ESM-first
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 // First, initialize the Angular testing environment.
@@ -61,6 +61,15 @@ try {
   anyH.addEvent = anyH.addEvent || function () { };
   anyH.each = anyH.each || function (arr: any, fn: any) { if (arr && Array.isArray(arr)) arr.forEach(fn); };
   anyH.extend = anyH.extend || function (a: any, b: any) { Object.assign(a, b || {}); };
+  // Minimal Series/base stubs so modules that extend Series (solid-gauge, etc.)
+  // don't throw during Karma test-time. Real behavior isn't needed for unit tests.
+  anyH.Series = anyH.Series || function Series() { };
+  anyH.Series.prototype = anyH.Series.prototype || {};
+  anyH.seriesTypes = anyH.seriesTypes || {};
+  anyH.seriesType = anyH.seriesType || function (type: string, Base: any, options?: any, proto?: any) {
+    // record a minimal series type so modules can reference it
+    anyH.seriesTypes[type] = proto || {};
+  };
   // Replace the real chart factory with a test-safe stub so components that call
   // Highcharts.chart/Chart during ngOnInit don't execute the full Highcharts
   // initialization (which expects complex internal state).
@@ -72,15 +81,15 @@ try {
 // Provide common testing modules/providers globally to reduce missing-provider failures
 beforeEach(() => {
   TestBed.configureTestingModule({
-    declarations: [HighchartsShimDirective],
+    declarations: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     imports: [BrowserAnimationsModule,
         ReactiveFormsModule,
-        MatDialogModule,
-        MatCardModule,
-        MatSnackBarModule,
-        MatTableModule,
-        MatPaginatorModule,
+  MatDialogModule,
+  MatCardModule,
+  MatSnackBarModule,
+  MatTableModule,
+  MatPaginatorModule,
         MatSortModule,
         MatFormFieldModule,
         MatInputModule,
