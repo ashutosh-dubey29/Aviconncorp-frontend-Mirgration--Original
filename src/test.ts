@@ -61,6 +61,15 @@ try {
   anyH.addEvent = anyH.addEvent || function () { };
   anyH.each = anyH.each || function (arr: any, fn: any) { if (arr && Array.isArray(arr)) arr.forEach(fn); };
   anyH.extend = anyH.extend || function (a: any, b: any) { Object.assign(a, b || {}); };
+  // Minimal Series/base stubs so modules that extend Series (solid-gauge, etc.)
+  // don't throw during Karma test-time. Real behavior isn't needed for unit tests.
+  anyH.Series = anyH.Series || function Series() { };
+  anyH.Series.prototype = anyH.Series.prototype || {};
+  anyH.seriesTypes = anyH.seriesTypes || {};
+  anyH.seriesType = anyH.seriesType || function (type: string, Base: any, options?: any, proto?: any) {
+    // record a minimal series type so modules can reference it
+    anyH.seriesTypes[type] = proto || {};
+  };
   // Replace the real chart factory with a test-safe stub so components that call
   // Highcharts.chart/Chart during ngOnInit don't execute the full Highcharts
   // initialization (which expects complex internal state).
