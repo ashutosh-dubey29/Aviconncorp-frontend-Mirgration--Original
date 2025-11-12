@@ -9,6 +9,7 @@ import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { DataTableItem } from '../super-admin/data-table-datasource';
 import { MatTable } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -26,7 +27,7 @@ export class DialogData{
   templateUrl: './pf-table.component.html',
   styleUrls: ['./pf-table.component.css'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule]
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule, ...SHARED_MAT_MODULES]
 })
 export class PfTableComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>; 

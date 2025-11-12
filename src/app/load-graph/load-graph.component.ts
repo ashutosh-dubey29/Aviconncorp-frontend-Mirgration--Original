@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import * as Highcharts from 'highcharts';
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DataService } from '../services/data.service';
 import { Observable } from 'rxjs';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
   templateUrl: './load-graph.component.html',
   styleUrls: ['./load-graph.component.css'],
   standalone: true,
-  imports: [CommonModule, HighchartsStandaloneComponent, MatProgressSpinnerModule]
+  imports: [CommonModule, HighchartsStandaloneComponent, MatProgressSpinnerModule, ...SHARED_MAT_MODULES]
 })
 export class LoadGraphComponent implements OnInit {
   lineChartOptions:any;

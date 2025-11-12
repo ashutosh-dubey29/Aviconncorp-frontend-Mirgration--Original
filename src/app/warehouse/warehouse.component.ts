@@ -25,9 +25,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import * as Highcharts from 'highcharts';
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 //import {MatPaginator} from '@angular/material';
 import { MatSort } from '@angular/material/sort';
 import { UntypedFormControl } from '@angular/forms';
@@ -59,7 +60,7 @@ export interface KeyValueIf {
   templateUrl: './warehouse.component.html',
   styleUrls: ['./warehouse.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatIconModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatListModule, HighchartsStandaloneComponent]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatIconModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatListModule, HighchartsStandaloneComponent, ...SHARED_MAT_MODULES]
 })
 
 

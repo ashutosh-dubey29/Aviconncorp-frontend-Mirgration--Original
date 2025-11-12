@@ -20,6 +20,7 @@ import { UserService } from '../services/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { User } from '../models/user';
 import { resetpassword } from '../models/resetpassword';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +29,7 @@ import { resetpassword } from '../models/resetpassword';
   encapsulation: ViewEncapsulation.None,
   providers: [UserService],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDialogModule, RouterModule]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDialogModule, RouterModule, ...SHARED_MAT_MODULES]
 })
 
 export class LoginComponent implements OnInit {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './../services/user.service';
 import { CommonModule } from '@angular/common';
 import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 // Defer loading Highcharts modules to runtime via dynamic import() to avoid
 // top-level require() which breaks AOT/type-checking and tests.
 
@@ -10,7 +11,7 @@ import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalo
     templateUrl: './output-graph.component.html',
     styleUrls: ['./output-graph.component.css'],
   standalone: true,
-  imports: [CommonModule, HighchartsStandaloneComponent]
+  imports: [CommonModule, HighchartsStandaloneComponent, ...SHARED_MAT_MODULES]
 })
 export class OutputGraphComponent implements OnInit {
   lineChartOptions: any;
@@ -25,9 +26,9 @@ export class OutputGraphComponent implements OnInit {
     // to keep tests from failing when Highcharts is stubbed.
     (async () => {
       try {
-        const modBoost = await import('highcharts/modules/boost');
-        const modNoData = await import('highcharts/modules/no-data-to-display');
-        const modMore = await import('highcharts/highcharts-more');
+  const modBoost = await import('highcharts/es-modules/masters/modules/boost.src.js');
+  const modNoData = await import('highcharts/es-modules/masters/modules/no-data-to-display.src.js');
+  const modMore = await import('highcharts/es-modules/masters/highcharts-more.src.js');
 
         const unwrap = (m: any) => (m && (m.default || m)) || m;
         const Boost = unwrap(modBoost);

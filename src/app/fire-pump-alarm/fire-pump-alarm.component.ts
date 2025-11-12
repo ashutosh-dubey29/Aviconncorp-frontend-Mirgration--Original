@@ -13,6 +13,7 @@ import { AfterViewInit,  ViewChild, ViewChildren, QueryList } from '@angular/cor
 import { DataTableItem, DataTableDataSource } from '../super-admin/data-table-datasource';
 import { filter } from 'rxjs/operators';
 import { DataService } from './../services/data.service';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 export interface EmailData {
   serialno: any;
@@ -28,7 +29,7 @@ export interface EmailData {
   templateUrl: './fire-pump-alarm.component.html',
   styleUrls: ['./fire-pump-alarm.component.css'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule]
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, ...SHARED_MAT_MODULES]
 })
 
 

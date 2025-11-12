@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Inject} from '@angular/core';
 import { DataService } from '../services/data.service';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 export interface DialogData {
 
@@ -22,7 +23,7 @@ export interface DialogData {
   templateUrl: './dg-fuel-excel-export.component.html',
   styleUrls: ['./dg-fuel-excel-export.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule]
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule, ...SHARED_MAT_MODULES]
 })
 export class DgFuelExcelExportComponent implements OnInit {
 

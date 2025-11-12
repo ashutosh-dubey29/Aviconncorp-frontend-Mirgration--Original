@@ -65,7 +65,9 @@ export class DataTableDataSource extends DataSource<DataTableItem> {
     // Set the paginator's length
     this.paginator.length = this.data.length;
 
-    return merge(...dataMutations).pipe(map(() => {
+    // `dataMutations` contains different Observable types (page, sort, data array).
+    // Cast to `any` to satisfy RxJS 7 strict typing while preserving behavior.
+    return merge(...(dataMutations as any)).pipe(map(() => {
       return this.getPagedData(this.getSortedData([...this.data]));
     }));
   }

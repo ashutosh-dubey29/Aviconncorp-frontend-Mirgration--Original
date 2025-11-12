@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -14,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
     templateUrl: './alarm.component.html',
     styleUrls: ['./alarm.component.css'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule]
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, ...SHARED_MAT_MODULES]
 })
 export class AlarmComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;

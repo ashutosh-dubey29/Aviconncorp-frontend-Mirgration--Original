@@ -22,9 +22,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { MovieService } from '../services/movie.service';
-import {chart} from 'highcharts';
-import * as Highcharts from 'highcharts';
-import * as solidGauge from 'highcharts/modules/solid-gauge.src';
+// Prefer the ESM masters entrypoint to avoid CommonJS optimization warnings
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
+// Load the Solid Gauge module from the ESM masters path when needed
+// solid gauge will be loaded at runtime in the constructor to avoid
+// patching Highcharts during test bootstrap.
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -57,6 +59,21 @@ export class AdminComponent implements OnInit {
       stateName: [(''), Validators.required],
       cityName: [(''), Validators.required]
     });
+    // Load Solid Gauge module at runtime and register with Highcharts.
+    (async () => {
+      try {
+        const mod = await import('highcharts/es-modules/masters/modules/solid-gauge.src.js');
+        const unwrap = (m: any) => (m && (m.default || m)) || m;
+        const SolidGauge = unwrap(mod);
+        if (typeof SolidGauge === 'function') {
+          SolidGauge((Highcharts as any));
+        }
+      } catch (e) {
+        // ignore failures in test or restricted environments
+        // eslint-disable-next-line no-console
+        console.warn('Failed to load Highcharts solid-gauge module', e);
+      }
+    })();
     
   }
   gaugeType = "full"
@@ -149,7 +166,7 @@ getCustomers(){
         for (let i = 0; i <= response['data'].length-1; i++) {
           let data = response['data'][i];
           console.log("data", data)
-          let customer_details = data['customer']
+          let customer_details = data['customer'];
           let customer_id = customer_details['id'];
           let customer_username = customer_details['username'];
           let customer_email = customer_details['email'];

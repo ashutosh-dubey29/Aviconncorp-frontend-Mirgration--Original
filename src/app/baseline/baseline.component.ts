@@ -20,7 +20,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { UserService } from './../services/user.service';
 import { formatDate, getLocaleDayNames } from '@angular/common';
-import * as Highcharts from 'highcharts';
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 import { DataService } from './../services/data.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';

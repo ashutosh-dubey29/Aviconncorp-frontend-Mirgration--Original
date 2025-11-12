@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { DataTableItem } from '../super-admin/data-table-datasource';
 import { MatTable } from '@angular/material/table';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 
 export class DialogData{
@@ -32,7 +33,8 @@ export class DialogData{
       MatSortModule,
       MatFormFieldModule,
       MatInputModule,
-      MatDialogModule
+      MatDialogModule,
+      ...SHARED_MAT_MODULES
     ]
 })
 

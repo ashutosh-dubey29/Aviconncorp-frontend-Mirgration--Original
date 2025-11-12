@@ -23,7 +23,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import * as Highcharts from 'highcharts';
+// Use the Highcharts ESM masters entry for tests too to keep builds ESM-first
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 // First, initialize the Angular testing environment.

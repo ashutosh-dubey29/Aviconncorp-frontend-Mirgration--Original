@@ -9,7 +9,8 @@ import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { MatPaginator, MatSort, MatTableDataSource, MatTable } from '@angular/material';
-import * as Highcharts from 'highcharts';
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -58,7 +59,8 @@ export interface AlarmData {
       MatPaginatorModule,
       MatSortModule,
       MatFormFieldModule,
-      MatInputModule
+      MatInputModule,
+      ...SHARED_MAT_MODULES
     ]
 })
 
@@ -127,7 +129,15 @@ export class SuperAdminComponent {
         this.energyConsumed = response["total_unit_consumed"]
         this.energySaved = response["total_energy_saved"]
         this.percentageSaved = response["total_saved_percentage"]
-
+      },
+      error => {
+        // If backend is unreachable, populate with lightweight fallback so UI renders
+        console.error('SuperAdmin snapshot API failed', error);
+  try { this.serializedDate.setValue(new Date().toISOString().substring(0,10)); } catch (e) {}
+        this.alarms = [];
+        this.energyConsumed = 0;
+        this.energySaved = 0;
+        this.percentageSaved = 0;
       }
     )
     // calling alarm priority table api
@@ -163,6 +173,11 @@ export class SuperAdminComponent {
         this.alarmDataSource.paginator = this.paginator.toArray()[0];
         this.alarmDataSource.sort = this.sort.toArray()[0];
         // console.log("paginator : ", this.paginator)
+      },
+      error => {
+        console.error('SuperAdmin alarm table API failed', error);
+        // show an empty table instead of leaving UI broken
+        this.alarmDataSource = new MatTableDataSource([]);
       }
     )
 
@@ -185,6 +200,12 @@ export class SuperAdminComponent {
         this.dataSource = new MatTableDataSource(customerData);
         this.dataSource.paginator = this.paginator.toArray()[1];
         this.dataSource.sort = this.sort.toArray()[1];
+      },
+      error => {
+        console.error('SuperAdmin customers API failed', error);
+        // Provide a minimal fallback customer so the table renders for dev
+        const fallback = [{ custId: '0', custUserName: 'No backend', totalWH: '0', liveWH: '0', WHavgsaving: '0', maxsaving: '0', minsaving: '0' }];
+        this.dataSource = new MatTableDataSource(fallback);
       }
     )
   }

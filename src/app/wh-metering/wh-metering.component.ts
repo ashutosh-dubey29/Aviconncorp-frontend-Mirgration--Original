@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // Note: removed use of internal throwMatDialogContentAlreadyAttachedError which is no longer exported
 // from Angular Material in v16.
-import * as Highcharts from 'highcharts';
+// Use ESM build of Highcharts to avoid CommonJS optimization warnings
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 //import {MatPaginator} from '@angular/material';
 // import { MatSort } from '@angular/material/sort';
 import { UntypedFormControl } from '@angular/forms';
@@ -33,11 +34,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
 // import * as solidGauge from 'highcharts/modules/solid-gauge.src';
-import { chart } from 'highcharts';
+// prefer calling Highcharts.chart via the Highcharts namespace imported above
 // Defer loading Highcharts modules until runtime (constructor) so tests can
 // stub Highcharts before modules attempt to patch it. Loading modules at
 // top-level causes test-time errors because the library internals are not
@@ -79,7 +81,8 @@ export interface KeyValueIf {
             MatNativeDateModule,
                     MatButtonModule,
                     // local Highcharts wrapper (standalone)
-                    HighchartsStandaloneComponent
+                    HighchartsStandaloneComponent,
+                    ...SHARED_MAT_MODULES
         ]
 })
 export class WhMeteringComponent implements OnInit {
@@ -251,9 +254,9 @@ export class WhMeteringComponent implements OnInit {
                 // tests that stub Highcharts won't be patched prematurely.
                 (async () => {
                     try {
-                        const modBoost = await import('highcharts/modules/boost');
-                        const modNoData = await import('highcharts/modules/no-data-to-display');
-                        const modMore = await import('highcharts/highcharts-more');
+                    const modBoost = await import('highcharts/es-modules/masters/modules/boost.src.js');
+                    const modNoData = await import('highcharts/es-modules/masters/modules/no-data-to-display.src.js');
+                    const modMore = await import('highcharts/es-modules/masters/highcharts-more.src.js');
 
                         const unwrap = (m: any) => (m && (m.default || m)) || m;
 

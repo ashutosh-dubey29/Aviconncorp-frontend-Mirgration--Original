@@ -22,6 +22,7 @@ import { DataService } from './../services/data.service';
 import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { DeviceDetailsFemsComponent } from '../device-details-fems/device-details-fems.component';
 import { ExpiredDeviceDetailsFemsComponent } from '../expired-device-details-fems/expired-device-details-fems.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 export interface femsData{
    data:any;
    deviceCat:any;
@@ -52,7 +53,8 @@ export interface DialogData {
       MatButtonModule,
       MatIconModule,
       MatFormFieldModule,
-      MatInputModule
+      MatInputModule,
+      ...SHARED_MAT_MODULES
     ]
 })
 

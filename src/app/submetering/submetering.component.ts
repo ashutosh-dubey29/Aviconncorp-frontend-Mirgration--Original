@@ -17,8 +17,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 import { MatPaginator } from '@angular/material/paginator';
-import * as Highcharts from 'highcharts';
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 import { MatSort } from '@angular/material/sort';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -60,6 +61,7 @@ export interface KeyValueIf {
     MatNativeDateModule,
     // local Highcharts wrapper used across the app
     HighchartsStandaloneComponent,
+    ...SHARED_MAT_MODULES,
   ],
 })
 

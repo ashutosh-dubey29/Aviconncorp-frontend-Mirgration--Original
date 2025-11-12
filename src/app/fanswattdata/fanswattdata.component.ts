@@ -15,13 +15,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DialogData } from '../dialog-switchdash/dialog-switchdash.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 @Component({
     selector: 'app-fanswattdata',
     templateUrl: './fanswattdata.component.html',
     styleUrls: ['./fanswattdata.component.css'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule]
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule, ...SHARED_MAT_MODULES]
 })
 export class FanswattdataComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>; 

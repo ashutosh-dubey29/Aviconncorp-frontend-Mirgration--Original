@@ -15,6 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DataTableItem } from '../super-admin/data-table-datasource';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 export class DialogData{
 
@@ -35,7 +36,7 @@ export interface UserData {
     templateUrl: './device-details-fems.component.html',
     styleUrls: ['./device-details-fems.component.css'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule]
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule, ...SHARED_MAT_MODULES]
 })
 export class DeviceDetailsFemsComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>; 

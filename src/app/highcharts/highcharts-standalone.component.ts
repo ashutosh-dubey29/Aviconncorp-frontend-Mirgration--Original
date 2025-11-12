@@ -1,5 +1,8 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges, OnDestroy, EventEmitter, Output } from '@angular/core';
-import * as Highcharts from 'highcharts';
+// Use Highcharts ESM masters entrypoint to avoid CommonJS/AMD imports which trigger
+// Angular build optimization warnings. The .src.js ESM masters files are provided
+// by the highcharts package under `es-modules/masters`.
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 
 /**
  * Standalone Highcharts wrapper component.
