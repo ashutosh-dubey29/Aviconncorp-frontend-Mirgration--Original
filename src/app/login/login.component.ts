@@ -8,24 +8,32 @@ import { DataService } from './../services/data.service';
 
 import { GlobalService } from './../services/global.service';
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { Router, RouterModule } from '@angular/router';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { User } from '../models/user';
 import { resetpassword } from '../models/resetpassword';
-import { ifError } from 'assert';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
   encapsulation: ViewEncapsulation.None,
   providers: [UserService],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDialogModule, RouterModule, ...SHARED_MAT_MODULES]
 })
 
 export class LoginComponent implements OnInit {
-  userLogin: FormGroup;
+  userLogin: UntypedFormGroup;
   loading: boolean;
   adminDashboard: string;
   dashbaordData;
@@ -44,7 +52,7 @@ export class LoginComponent implements OnInit {
   options: any;
   subject: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private userService: UserService, public dialog: MatDialog,
+  constructor(private fb: UntypedFormBuilder, private router: Router, private userService: UserService, public dialog: MatDialog,
     private global: GlobalService, private data: DataService, private dashData: DashboardDataService,
   ) {
     this.userLogin = this.fb.group({

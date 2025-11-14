@@ -1,0 +1,4 @@
+{
+  "categories": ["A","B","C"],
+  "series": [{ "name": "Load", "data": [5,6,7] }]
+}

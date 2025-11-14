@@ -2,8 +2,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "downlevelIteration": true,
+    "paths": {
+      "@angular/material/legacy-*": ["src/patches/material-legacy-reexports/legacy-*"]
+    },
     "outDir": "./dist/out-tsc",
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
     "module": "esnext",
@@ -11,13 +14,16 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2022",
     "typeRoots": [
-      "node_modules/@types",
+      "node_modules/@types"
     ],
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "useDefineForClassFields": false
+    ,
+    "skipLibCheck": true
   }
 }

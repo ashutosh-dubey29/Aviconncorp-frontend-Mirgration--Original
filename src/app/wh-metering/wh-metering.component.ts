@@ -9,26 +9,48 @@ import { DashboardDataService } from './../services/dashboard-data.service';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatTable, throwMatDialogContentAlreadyAttachedError } from '@angular/material';
-import * as Highcharts from 'highcharts';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+// Note: removed use of internal throwMatDialogContentAlreadyAttachedError which is no longer exported
+// from Angular Material in v16.
+// Use ESM build of Highcharts to avoid CommonJS optimization warnings
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 //import {MatPaginator} from '@angular/material';
 // import { MatSort } from '@angular/material/sort';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
-import { from } from 'rxjs';
+import { UntypedFormControl } from '@angular/forms';
+import { Observable, interval, from } from 'rxjs';
 import { formatDate, getLocaleDayNames } from '@angular/common';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
+
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
-import { chart } from 'highcharts';
 // import * as solidGauge from 'highcharts/modules/solid-gauge.src';
+// prefer calling Highcharts.chart via the Highcharts namespace imported above
+// Defer loading Highcharts modules until runtime (constructor) so tests can
+// stub Highcharts before modules attempt to patch it. Loading modules at
+// top-level causes test-time errors because the library internals are not
+// yet prepared.
 import { ExcelsheetComponent } from '../excelsheet/excelsheet.component';
 import { PfTableComponent } from '../pf-table/pf-table.component';
 // import { LightsWattDataComponent } from '../lights-watt-data/lights-watt-data.component';
 import { LoadDataTableComponent } from '../load-data-table/load-data-table.component';
 import { CustomDateRangePickerComponent } from '../custom-date-range-picker/custom-date-range-picker.component';
 import { DgFuelExcelExportComponent } from '../dg-fuel-excel-export/dg-fuel-excel-export.component';
-import { data } from 'jquery';
+// removed incorrect import from 'jquery' (was shadowing local variables)
 
 
 export interface KeyValueIf {
@@ -42,6 +64,26 @@ export interface KeyValueIf {
     templateUrl: './wh-metering.component.html',
     styleUrls: ['./wh-metering.component.css']
     //providers:[PieGraphComponent]
+        ,
+        standalone: true,
+        imports: [
+            CommonModule,
+            ReactiveFormsModule,
+            FormsModule,
+            MatTableModule,
+            MatPaginatorModule,
+            MatSortModule,
+            MatDialogModule,
+            MatFormFieldModule,
+            MatInputModule,
+            MatSelectModule,
+            MatDatepickerModule,
+            MatNativeDateModule,
+                    MatButtonModule,
+                    // local Highcharts wrapper (standalone)
+                    HighchartsStandaloneComponent,
+                    ...SHARED_MAT_MODULES
+        ]
 })
 export class WhMeteringComponent implements OnInit {
 
@@ -81,10 +123,10 @@ export class WhMeteringComponent implements OnInit {
 
     selected_graph = '0';
     selected_task = '0';
-    date = new FormControl(new Date());
-    loadDate = new FormControl(new Date());
-    dgFuelDate = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString().substring(0, 10));
+    date = new UntypedFormControl(new Date());
+    loadDate = new UntypedFormControl(new Date());
+    dgFuelDate = new UntypedFormControl(new Date());
+    serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0, 10));
     whichGraph = 1;
     loadGraph: Boolean = true;
     seprateManinsDgLoad: Boolean = false;
@@ -110,10 +152,22 @@ export class WhMeteringComponent implements OnInit {
     show_dg_mains_run_time: any;
     liveData = new LiveMeteringDataModel();
     loading = true;
-    updateFlag: boolean = false;
+    // legacy flag used throughout the code; we expose a getter/setter so older
+    // assignments `this.updateFlag = true` will toggle the wrapper's update signal.
+    private _updateFlag = false;
     updateLoadDataFlag: boolean = false;
     Highcharts = Highcharts;
     pieChart = Highcharts;
+    // wrapper update toggle used by the standalone component
+    chartUpdateFlag = false;
+    // modules to pass into the standalone wrapper — populated in constructor
+    hcModules: Array<any> = [];
+
+    get updateFlag(): boolean { return this._updateFlag; }
+    set updateFlag(val: boolean) {
+        if (val) this.chartUpdateFlag = !this.chartUpdateFlag;
+        this._updateFlag = val;
+    }
     public pieChartOptions: any;
     barChartOptions: any;
     chartConstructor: string = 'chart';
@@ -153,8 +207,8 @@ export class WhMeteringComponent implements OnInit {
     seprateManinsDgLoadChartOptions: any;
     // Highcharts = Highcharts;
     chartLoading: Boolean = false;
-    @ViewChild('chart', { static: false }) chart;
-    @ViewChild("loadChart", { static: false }) loadChart;
+    @ViewChild('chart') chart;
+    @ViewChild("loadChart") loadChart;
 
     // normalize series data to ensure numeric points and consistent shapes
     private normalizeSeries(inputSeries: any): any[] {
@@ -191,6 +245,32 @@ export class WhMeteringComponent implements OnInit {
         private router: Router,
         public dialog: MatDialog,
     ) {
+                // Try to require Highcharts modules at runtime. Wrap in try/catch so
+                // tests (which stub Highcharts) or environments without require don't
+                // crash during module loading.
+                // Try to dynamically import Highcharts modules at runtime. Using
+                // dynamic `import()` avoids referring to `require` (which breaks
+                // type checking for AOT builds) and keeps module loading lazy so
+                // tests that stub Highcharts won't be patched prematurely.
+                (async () => {
+                    try {
+                    const modBoost = await import('highcharts/es-modules/masters/modules/boost.src.js');
+                    const modNoData = await import('highcharts/es-modules/masters/modules/no-data-to-display.src.js');
+                    const modMore = await import('highcharts/es-modules/masters/highcharts-more.src.js');
+
+                        const unwrap = (m: any) => (m && (m.default || m)) || m;
+
+                        const Boost = unwrap(modBoost);
+                        const noData = unwrap(modNoData);
+                        const More = unwrap(modMore);
+
+                        this.hcModules = [Boost, noData, More].filter(Boolean);
+                    } catch (e) {
+                        // ignore failures during tests or in environments where
+                        // dynamic import can't resolve the modules
+                        this.hcModules = [];
+                    }
+                })();
         this.show_dg_mains_run_time = localStorage.getItem('show_dg_mains_run_time');
         if (this.show_dg_mains_run_time == "true") {
             this.graphTypes = [
@@ -364,7 +444,7 @@ export class WhMeteringComponent implements OnInit {
         }, 0);
 
         if (this.is_load_graph_visible == "true") {
-            this.load_graph(data); // this function will call for particular customer and site
+            this.load_graph({}); // call with empty data object (previous accidental import created a global 'data')
         }
         console.log("show fuel data: ", this.dg_fuel_system_installed)
         if (this.dg_fuel_system_installed == 'true') {
@@ -385,7 +465,7 @@ export class WhMeteringComponent implements OnInit {
 
 
     ngAfterViewInit() {
-        Observable.interval(15000).subscribe(
+        interval(15000).subscribe(
             response => {
                 if (this.selected_load_options == "4" && this.liveLoadApiCal) {
                     this.load_data_every_second();
@@ -393,7 +473,7 @@ export class WhMeteringComponent implements OnInit {
 
             }
         );
-        Observable.interval(5000).subscribe(
+        interval(5000).subscribe(
             response => {
                 this.getSiteCurrLoadInfoData();
             });

@@ -1,11 +1,21 @@
 import { Component, OnInit,Inject ,ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { DataService } from './../services/data.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {MatTable} from '@angular/material/table';
+import { MatTable } from '@angular/material/table';
 import { AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-import {MatPaginator,  MatSort, MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { DataTableItem } from '../super-admin/data-table-datasource';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 export class DialogData{
 
@@ -23,9 +33,11 @@ export interface UserData {
 }
 
 @Component({
-  selector: 'app-expired-device-details-fems',
-  templateUrl: './expired-device-details-fems.component.html',
-  styleUrls: ['./expired-device-details-fems.component.css']
+    selector: 'app-expired-device-details-fems',
+    templateUrl: './expired-device-details-fems.component.html',
+    styleUrls: ['./expired-device-details-fems.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule, MatFormFieldModule, MatInputModule, ...SHARED_MAT_MODULES]
 })
 export class ExpiredDeviceDetailsFemsComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>; 

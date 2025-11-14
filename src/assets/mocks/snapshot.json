@@ -1,0 +1,4 @@
+{
+  "site": { "id": 1, "name": "Mock Site A" },
+  "energy": { "current": 55, "units": "kW" }
+}

@@ -233,10 +233,7 @@
                     </div>
                 </div>
                 <div class="status-panel-body" style="height:291px">
-                    <highcharts-chart [Highcharts]="pieChart" [constructorType]="chartConstructor"
-                        [options]="pieChartOptions" [callbackFunction]="chartCallback" [(update)]="updateFlag"
-                        [oneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;">
-                    </highcharts-chart>
+                    <app-highcharts [options]="pieChartOptions" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                 </div>
             </div>
 
@@ -323,9 +320,7 @@
                     </div>
                 </div>
                 <div class="chart-body" *ngIf="dgFuelData">
-                    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="stockChart"
-                        [options]="dgFuelConsumptionOptions" [callbackFunction]="chartCallback" [(update)]="updateFlag"
-                        [oneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                    <app-highcharts [options]="dgFuelConsumptionOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                     <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4">
@@ -339,10 +334,7 @@
 
                 </div>
                 <div class="chart-body" *ngIf="dgFuelDataSelectionChange">
-                    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="stockChart"
-                        [options]="dgFuelConsumptionSelectionOptions" [callbackFunction]="chartCallback"
-                        [(update)]="updateFlag" [oneToOne]="oneToOneFlag"
-                        style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                    <app-highcharts [options]="dgFuelConsumptionSelectionOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                     <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4">
@@ -398,9 +390,7 @@
 
                 <div class="chart-body" *ngIf="loadGraph">
 
-                    <highcharts-chart #loadChart [Highcharts]="Highcharts" [constructorType]="stockChart"
-                        [options]="lineChartOptions" [callbackFunction]="chartCallback" [(update)]="updateFlag "
-                        [oneToOne]="true" style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                    <app-highcharts #loadChart [options]="lineChartOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" [isOneToOne]="true" style="width: 100%; height: 100%; display: block;"></app-highcharts>
 
                     <div class="row">
                         <div class="col-8"></div>
@@ -416,10 +406,7 @@
 
                 <div class="chart-body" *ngIf="seprateManinsDgLoad">
 
-                    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="stockChart"
-                        [options]="seprateManinsDgLoadChartOptions" [callbackFunction]="chartCallback"
-                        [(update)]="updateLoadDataFlag" [oneToOne]="true"
-                        style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                    <app-highcharts [options]="seprateManinsDgLoadChartOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" [isOneToOne]="true" style="width: 100%; height: 100%; display: block;"></app-highcharts>
 
                     <div class="row">
                         <div class="col-8"></div>
@@ -448,9 +435,7 @@
                 </div>
                 <div class="chart-body">
 
-                    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
-                        [options]="lineChartOption" [callbackFunction]="chartCallback" [(update)]="updateFlag"
-                        [oneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                    <app-highcharts [options]="lineChartOption" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                 </div>
 
             </div>
@@ -502,9 +487,7 @@
                     </div>
                 </div>
                 <div class="chart-body" *ngIf="unitConsumptionGraph">
-                    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
-                        [options]="barChartOptions" [callbackFunction]="chartCallback" [(update)]="updateFlag"
-                        [oneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                    <app-highcharts [options]="barChartOptions" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                     <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4"><button class="md-raised md-primary md-button md-link-ripple" type="button"
@@ -521,9 +504,7 @@
                 </div>
 
                 <div class="chart-body" *ngIf="runTimeGraph">
-                    <highcharts-chart [Highcharts]="Highcharts" [constructorType]="chartConstructor"
-                        [options]="barChartOptionsRunTime" [callbackFunction]="chartCallback" [(update)]="updateFlag"
-                        [oneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                    <app-highcharts [options]="barChartOptionsRunTime" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
                     <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4">

@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormGroup, FormControl } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { Inject} from '@angular/core';
 import { DataService } from '../services/data.service';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 export interface DialogData {
 
@@ -14,7 +21,9 @@ export interface DialogData {
 @Component({
   selector: 'app-dg-fuel-excel-export',
   templateUrl: './dg-fuel-excel-export.component.html',
-  styleUrls: ['./dg-fuel-excel-export.component.css']
+  styleUrls: ['./dg-fuel-excel-export.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule, ...SHARED_MAT_MODULES]
 })
 export class DgFuelExcelExportComponent implements OnInit {
 
@@ -26,12 +35,12 @@ export class DgFuelExcelExportComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private dataService:DataService,) { }
 
     siteId= localStorage.getItem('siteId');
-    date = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString().substring(0,10));
+    date = new UntypedFormControl(new Date());
+    serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0,10));
     
-      excelDataForm = new FormGroup({
-      startDate: new FormControl(''),
-      endDate: new FormControl(''),
+      excelDataForm = new UntypedFormGroup({
+      startDate: new UntypedFormControl(''),
+      endDate: new UntypedFormControl(''),
 
     });
 

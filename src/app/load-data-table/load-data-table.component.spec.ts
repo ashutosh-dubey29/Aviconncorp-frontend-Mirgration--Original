@@ -1,4 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync as async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LoadDataTableComponent } from './load-data-table.component';
 
@@ -8,7 +12,7 @@ describe('LoadDataTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadDataTableComponent ]
+      imports: [ LoadDataTableComponent, MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule ]
     })
     .compileComponents();
   }));

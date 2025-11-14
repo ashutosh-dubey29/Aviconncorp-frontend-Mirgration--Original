@@ -6,7 +6,9 @@
     <div class="content_area">
       <div class="main_content">
 
-        <router-outlet></router-outlet>
+            <router-outlet></router-outlet>
+            <!-- Dev-only mock toggle -->
+            <dev-toggle *ngIf="!isProduction"></dev-toggle>
 
       </div>
     </div>

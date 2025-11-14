@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Album } from '../models/user';
-import { FormArray } from '@angular/forms';
+import { UntypedFormArray } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -36,11 +36,11 @@ export class MovieService {
     }));
   }
 
-  getAllAsFormArray(d): Observable<FormArray> {
+  getAllAsFormArray(d): Observable<UntypedFormArray> {
     return this.getAll(d).pipe(map((albums: Album[]) => {
       // Maps all the albums into a formGroup defined in tge album.model.ts
       const fgs = albums.map(Album.asFormGroup);
-      return new FormArray(fgs);
+      return new UntypedFormArray(fgs);
     }));
   }
 }

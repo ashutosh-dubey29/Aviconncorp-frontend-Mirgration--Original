@@ -2,10 +2,9 @@ import { changePassword } from './../models/changepassword';
 import { Forgotpassword } from './../models/forgotpassword';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw'
+import { catchError } from 'rxjs/operators';
 import { DataRowOutlet } from '@angular/cdk/table';
 import { DataService } from './data.service';
 
@@ -20,11 +19,12 @@ export class UserService {
 
 
 loginUser(userData: any): Observable<any> {
-    return this.http.post(this.baseUrl + 'login/', userData, this.getAuthHeaders()).catch(this.errorHandler);
+    return this.http.post(this.baseUrl + 'login/', userData, this.getAuthHeaders())
+      .pipe(catchError(err => this.errorHandler(err)));
 
   }
   errorHandler(error: HttpErrorResponse){
-    return Observable.throw(error.message || "Server Error");
+    return throwError(() => error.message || "Server Error");
   }
 
 

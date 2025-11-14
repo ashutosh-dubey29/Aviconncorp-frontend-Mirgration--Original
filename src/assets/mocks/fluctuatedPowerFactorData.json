@@ -1,0 +1,4 @@
+{
+  "series": [{ "name": "PF", "data": [0.95, 0.96, 0.94] }],
+  "months": ["Oct","Nov","Dec"]
+}

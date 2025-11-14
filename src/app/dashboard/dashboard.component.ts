@@ -1,7 +1,21 @@
 import { GlobalService } from './../services/global.service';
 import { DataService } from './../services/data.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
+import { CustomerDashboardComponent } from '../customer-dashboard/customer-dashboard.component';
+import { WarehouseComponent } from '../warehouse/warehouse.component';
+import { BaselineComponent } from '../baseline/baseline.component';
+import { AdminComponent } from '../admin/admin.component';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -9,14 +23,29 @@ import { TokenService } from '../services/token.service';
 import { changePassword } from '../models/changepassword';
 import { Forgotpassword } from './../models/forgotpassword';
 import { UserService } from '../services/user.service';
-import * as Highcharts from 'highcharts';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogSwitchdashComponent } from '../dialog-switchdash/dialog-switchdash.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    CustomerDashboardComponent,
+    WarehouseComponent,
+    BaselineComponent,
+    AdminComponent,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatDialogModule
+  , ...SHARED_MAT_MODULES]
 })
 export class DashboardComponent implements OnInit {
   isSupperAdmin = true;

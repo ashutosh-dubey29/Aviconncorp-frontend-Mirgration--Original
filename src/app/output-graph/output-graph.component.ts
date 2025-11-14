@@ -1,42 +1,53 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import * as Highcharts from 'highcharts';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from './../services/user.service';
-
-declare var require: any;
-let Boost = require('highcharts/modules/boost');
-let noData = require('highcharts/modules/no-data-to-display');
-let More = require('highcharts/highcharts-more');
-
-
-Boost(Highcharts);
-noData(Highcharts);
-More(Highcharts);
-noData(Highcharts);
+import { CommonModule } from '@angular/common';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
+// Defer loading Highcharts modules to runtime via dynamic import() to avoid
+// top-level require() which breaks AOT/type-checking and tests.
 
 @Component({
-  selector: 'app-output-graph',
-  templateUrl: './output-graph.component.html',
-  styleUrls: ['./output-graph.component.css']
+    selector: 'app-output-graph',
+    templateUrl: './output-graph.component.html',
+    styleUrls: ['./output-graph.component.css'],
+  standalone: true,
+  imports: [CommonModule, HighchartsStandaloneComponent, ...SHARED_MAT_MODULES]
 })
 export class OutputGraphComponent implements OnInit {
-   lineChartOptions: any;
-   siteId = 90;
-   Highcharts = Highcharts;
-  @ViewChild('alarmdata', { static: false }) alarmdata: ElementRef;
+  lineChartOptions: any;
+  siteId = 90;
+  // Pass module functions to the wrapper (loaded at runtime)
+  hcModules: Array<any> = [];
+  // Simple toggle to force the wrapper to call update
+  chartUpdateFlag = false;
 
-  
-  loadData(data) {
-    this.alarmdata.nativeElement.innerHTML = data;
-}
+  constructor(private UserService: UserService,) {
+    // Load Highcharts modules at runtime to avoid top-level require() and
+    // to keep tests from failing when Highcharts is stubbed.
+    (async () => {
+      try {
+  const modBoost = await import('highcharts/es-modules/masters/modules/boost.src.js');
+  const modNoData = await import('highcharts/es-modules/masters/modules/no-data-to-display.src.js');
+  const modMore = await import('highcharts/es-modules/masters/highcharts-more.src.js');
 
-constructor(private UserService: UserService,) { }
+        const unwrap = (m: any) => (m && (m.default || m)) || m;
+        const Boost = unwrap(modBoost);
+        const noData = unwrap(modNoData);
+        const More = unwrap(modMore);
 
-ngOnInit() {
-  Highcharts.chart('alarmdata', this.lineChartOptions);
-  this.getMonthlyTrend();
-}
- 
-getMonthlyTrend(){
+        this.hcModules = [Boost, noData, More].filter(Boolean);
+      } catch (e) {
+        // ignore: tests or environments may not resolve these modules
+        this.hcModules = [];
+      }
+    })();
+  }
+
+  ngOnInit() {
+    this.getMonthlyTrend();
+  }
+
+  getMonthlyTrend(){
 
   let data1 = {'site_id': this.siteId};
   this.UserService.energySavingMonthlyTrend(data1).subscribe(
@@ -55,7 +66,7 @@ getMonthlyTrend(){
             seriesData.push(data2);
           }
 
-    // highcharts = Highcharts;
+    // Compose options for the standalone wrapper
     this.lineChartOptions = {
       colorCount:'4',
       colors: ['#90ED7D','#ff7a01', '#7cb5ec', '#058DC7'],
@@ -102,10 +113,13 @@ getMonthlyTrend(){
       legend :{
         itemStyle : {color:'white',},
       },
-      series:  seriesData 
-            }  
-    console.log("graph data", this.lineChartOptions)
-});
+  series:  seriesData 
+    };
+
+    // toggle update flag so the wrapper updates (or creates) the chart
+    this.chartUpdateFlag = !this.chartUpdateFlag;
+    console.log("graph data", this.lineChartOptions);
+    });
 
 }
   }

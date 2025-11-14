@@ -8,12 +8,31 @@ import { LoginComponent } from './../login/login.component';
 
 import { UserService } from './../services/user.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatTable } from '@angular/material';
-import * as Highcharts from 'highcharts';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { HighchartsStandaloneComponent } from '../highcharts/highcharts-standalone.component';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import Highcharts from 'highcharts/es-modules/masters/highcharts.src.js';
 //import {MatPaginator} from '@angular/material';
 import { MatSort } from '@angular/material/sort';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
+import { UntypedFormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 // import {formatDate} from '@angular/common';
 import { formatDate, getLocaleDayNames } from '@angular/common';
@@ -39,7 +58,9 @@ export interface KeyValueIf {
 @Component({
   selector: 'app-warehouse',
   templateUrl: './warehouse.component.html',
-  styleUrls: ['./warehouse.component.css']
+  styleUrls: ['./warehouse.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule, MatIconModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatListModule, HighchartsStandaloneComponent, ...SHARED_MAT_MODULES]
 })
 
 
@@ -65,8 +86,8 @@ export class WarehouseComponent implements OnInit {
 
   selected_graph = '0';
   selected_task = '0';
-  date = new FormControl(new Date());
-  serializedDate = new FormControl((new Date()).toISOString().substring(0, 10));
+  date = new UntypedFormControl(new Date());
+  serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0, 10));
   filterDate: string;
   picker1: Date;
   dashboardType: string;
@@ -93,10 +114,10 @@ export class WarehouseComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild(MatTable, { static: false }) table: MatTable<DataTableItem>;
-  @ViewChild('chart', { static: false }) chart;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatTable) table: MatTable<DataTableItem>;
+  @ViewChild('chart') chart;
   isCollapsed: boolean = true;
   color = 'primary';
   mode = 'determinate';

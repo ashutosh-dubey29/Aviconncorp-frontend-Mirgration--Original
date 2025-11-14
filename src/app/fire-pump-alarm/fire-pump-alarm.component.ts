@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { UserService } from '../services/user.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable, interval } from 'rxjs';
 import { DataRowOutlet } from '@angular/cdk/table';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
-import {MatSort} from '@angular/material';
-import {MatTable} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import { AfterViewInit,  ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { DataTableItem, DataTableDataSource } from '../super-admin/data-table-datasource';
-import { filter } from 'rxjs-compat/operator/filter';
+import { filter } from 'rxjs/operators';
 import { DataService } from './../services/data.service';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 
 export interface EmailData {
   serialno: any;
@@ -22,7 +27,9 @@ export interface EmailData {
 @Component({
   selector: 'app-fire-pump-alarm',
   templateUrl: './fire-pump-alarm.component.html',
-  styleUrls: ['./fire-pump-alarm.component.css']
+  styleUrls: ['./fire-pump-alarm.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, ...SHARED_MAT_MODULES]
 })
 
 
@@ -38,7 +45,8 @@ export class FirePumpAlarmComponent implements OnInit {
   myObj = JSON.parse(localStorage.getItem("account"));
   user_id = this.myObj["id"];
   user_type = this.myObj["UserType"];
-  alarmData = []
+  // Provide defaults so templates that index alarmData don't break before data arrives.
+  alarmData: any[] = [{}, {}, {}, {}, {}];
   main:any;
   aisleName:any;
   auto:any;
@@ -74,9 +82,9 @@ export class FirePumpAlarmComponent implements OnInit {
   }
 
    ngAfterViewInit() {
-     Observable.interval(5000).subscribe(
-         response => { this.getFireAlarmData(); }
-     );
+     interval(5000).subscribe(
+           () => { this.getFireAlarmData(); }
+       );
    }
 
    customerPage(){

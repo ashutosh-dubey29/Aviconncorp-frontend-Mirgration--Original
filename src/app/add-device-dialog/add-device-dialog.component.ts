@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormGroup, FormControl } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 import {formatDate, getLocaleDayNames} from '@angular/common';
 import { FemsComponent } from '../fems/fems.component';
@@ -24,46 +32,49 @@ export interface DialogData {
 @Component({
   selector: 'app-add-device-dialog',
   templateUrl: './add-device-dialog.component.html',
-  styleUrls: ['./add-device-dialog.component.css']
+  styleUrls: ['./add-device-dialog.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatDialogModule]
 })
 export class AddDeviceDialogComponent implements OnInit {
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<AddDeviceDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private dataService:DataService) { }
 
     siteId= localStorage.getItem('siteId');
-    date = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString().substring(0,10));
+    date = new UntypedFormControl(new Date());
+    serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0,10));
 
   
-    inventoryDataForm = new FormGroup({
-      deviceId: new FormControl(''),
-      deviceAssetNo: new FormControl(''),
-      deviceName: new FormControl(''),
-      deviceModelNo: new FormControl(''),
-      location: new FormControl(''),
-      warrantyTillDate: new FormControl(''),
-      nextServiceDate: new FormControl(''),
-      lastServiceDate: new FormControl(''),
-      updatedBy: new FormControl('')
+    inventoryDataForm = new UntypedFormGroup({
+      deviceId: new UntypedFormControl(''),
+      deviceAssetNo: new UntypedFormControl(''),
+      deviceName: new UntypedFormControl(''),
+      deviceModelNo: new UntypedFormControl(''),
+      location: new UntypedFormControl(''),
+      warrantyTillDate: new UntypedFormControl(''),
+      nextServiceDate: new UntypedFormControl(''),
+      lastServiceDate: new UntypedFormControl(''),
+      updatedBy: new UntypedFormControl('')
 
     });
   ngOnInit() {
     console.log("#################### I am in ngOnInit fuction: ", this.data);
     this.getDeviceName();
-    if (this.data !== null){
-      this.inventoryDataForm.setValue({
-        deviceId: this.data.id?this.data.id:"",
-        deviceName: this.data.deviceName?this.data.deviceName:"",
-        deviceAssetNo:this.data.assetNo?this.data.assetNo:"",
-        deviceModelNo: this.data.modelno?this.data.modelno:"",
-        location: this.data.location ? this.data.location:"", 
-        warrantyTillDate: this.data.warrenty ? this.data.warrenty:"",
-        nextServiceDate: this.data.next_service?this.data.next_service:"", 
-        lastServiceDate: this.data.last_service?this.data.last_service:"",
-        updatedBy: this.data.updatedBy?this.data.updatedBy:"",
+    if (this.data) {
+      // patchValue so tests with undefined MAT_DIALOG_DATA don't fail
+      this.inventoryDataForm.patchValue({
+        deviceId: this.data.id ? this.data.id : "",
+        deviceName: this.data.deviceName ? this.data.deviceName : "",
+        deviceAssetNo: this.data.assetNo ? this.data.assetNo : "",
+        deviceModelNo: this.data.modelno ? this.data.modelno : "",
+        location: this.data.location ? this.data.location : "",
+        warrantyTillDate: this.data.warrenty ? this.data.warrenty : "",
+        nextServiceDate: this.data.next_service ? this.data.next_service : "",
+        lastServiceDate: this.data.last_service ? this.data.last_service : "",
+        updatedBy: this.data.updatedBy ? this.data.updatedBy : "",
       });
     }
-    
+
   }
  
 

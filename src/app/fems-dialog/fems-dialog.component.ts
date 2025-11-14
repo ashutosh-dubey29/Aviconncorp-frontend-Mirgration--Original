@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 import { DataService } from '../services/data.service';
 export interface DialogData {
   animal: string;
@@ -12,7 +16,9 @@ export interface DialogData {
 @Component({
   selector: 'app-fems-dialog',
   templateUrl: './fems-dialog.component.html',
-  styleUrls: ['./fems-dialog.component.css']
+  styleUrls: ['./fems-dialog.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatDialogModule, MatButtonModule, ...SHARED_MAT_MODULES]
 })
 export class FemsDialogComponent implements OnInit {
   // animal: string;

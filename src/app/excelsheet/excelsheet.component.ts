@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormGroup, FormControl } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { Inject} from '@angular/core';
 import { DataService } from '../services/data.service';
+import { SHARED_MAT_MODULES } from '../shared/material-imports';
 export interface DialogData {
 
   from_date: string;
@@ -13,7 +20,9 @@ export interface DialogData {
 @Component({
   selector: 'app-excelsheet',
   templateUrl: './excelsheet.component.html',
-  styleUrls: ['./excelsheet.component.css']
+  styleUrls: ['./excelsheet.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule, ...SHARED_MAT_MODULES]
 })
 export class ExcelsheetComponent implements OnInit {
   myObj = JSON.parse(localStorage.getItem("account"));
@@ -24,25 +33,24 @@ export class ExcelsheetComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private dataService:DataService,) { }
 
     siteId= localStorage.getItem('siteId');
-    date = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString().substring(0,10));
+    date = new UntypedFormControl(new Date());
+    serializedDate = new UntypedFormControl((new Date()).toISOString().substring(0,10));
     
-      excelDataForm = new FormGroup({
-      startDate: new FormControl(''),
-      endDate: new FormControl(''),
+      excelDataForm = new UntypedFormGroup({
+      startDate: new UntypedFormControl(''),
+      endDate: new UntypedFormControl(''),
 
     });
 
   ngOnInit() {
   
-    if (this.data !== null){
-      this.excelDataForm.setValue({
-        startDate: this.data.from_date ? this.data.from_date:"",
-        endDate: this.data.till_date?this.data.till_date:"", 
-      
+    if (this.data) {
+      // patchValue tolerates missing properties and is safer during tests
+      this.excelDataForm.patchValue({
+        startDate: this.data.from_date ? this.data.from_date : "",
+        endDate: this.data.till_date ? this.data.till_date : "",
       });
     }
-
 
   }
 

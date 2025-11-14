@@ -1,0 +1,8 @@
+{
+  "categories": ["Mains","DG","Solar"],
+  "series": [
+    { "name": "Mains", "data": [60,58,62] },
+    { "name": "DG", "data": [30,33,28] },
+    { "name": "Solar", "data": [10,9,10] }
+  ]
+}
