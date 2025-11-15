@@ -19,7 +19,7 @@ export const environment = {
 
 
           // apiUrl: 'https://asem1.aviconn.in:8005/api/'   //new server path (test_project)
-  apiUrl: 'https://asem.aviconnncorp.com/api/'   //new server path (test_project)
+  apiUrl: 'https://asem.aviconncorp.com/api/'   //new server path (test_project)
         // apiUrl: 'http://127.0.0.1:8000/api/' //local system path
       //  apiUrl: 'http://192.168.1.2:8000/api/'
 
