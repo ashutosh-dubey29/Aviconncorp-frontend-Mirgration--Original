@@ -1,0 +1,4 @@
+{
+  "series": [ { "name": "Fuel (L)", "data": [100,120,110] } ],
+  "categories": ["Jan","Feb","Mar"]
+}

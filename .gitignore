@@ -1,0 +1,9 @@
+node_modules
+/.angular
+/dist
+/out-tsc
+/coverage
+.vs
+*.log
+.idea
+*.bak

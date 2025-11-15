@@ -1,0 +1,525 @@
+<div class="row" id="breadcrumb" style="margin-right:15px !important;">
+    <div class="col-md-8 col-sm-12">
+        <div class="row" style="margin-left:2px !important">
+            <div id="bc2" style="left: 1% !important;" class="btn-group btn-breadcrumb">
+                <a (click)="home()" *ngIf="super_admin_home" class="btn btn-default"><i class="fa fa-home"></i></a>
+                <a (click)="home()" *ngIf="customer_home" class="btn btn-default"><i class="fa fa-home"></i></a>
+                <a (click)="customerPage()" *ngIf="customer_name" class="btn btn-default">
+                    <div>Customer Page</div>
+                </a>
+                <a (click)="sitePage()" *ngIf="site_dash" class="btn btn-default">Site Page</a>
+                 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <button class="btn btn-float btn-primary" style="margin-right: 35px !important;">
+            <span class="ng-scope" (click)="openSiteDashboard()">Select Site</span>
+        </button>
+    </div>
+
+</div>
+<!-- <div class="container no-margin "> -->
+<div id="page-wrapper" class="container-fluid">
+    <!-- dashboard content -->
+    <div *ngIf="isShown">
+        <div class="row" *ngIf="!pf_visible">
+            <div class="dashboard_trakcer">Live Data</div>
+            <hr>
+
+            <!-- 1st snapshot start -->
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="circle-title2">
+                    <div class="circle-title-heading">
+                        <!-- <i class="fa fa-bell fa-fw fa-3x"></i> -->
+                        <img id="img-ctn" src="/assets/image/consume.png" width="45">
+                    </div>
+                    <div class="box2">
+                        <div class="box-heading text-faded" style="font-weight: 700;">Mains or DG</div>
+
+                        <div class="box-number text-faded">{{ liveData.supply_source }}</div>
+                        <!-- <div class="box-number text-faded">{{ supply_source}}</div> -->
+
+                        <!--<a du-smooth-scroll="table" du-scrollspy class="footer">More Info<i
+                                class="fa fa-chevron-circle-right"></i></a> -->
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- 1st snapshot end -->
+
+
+            <!-- 2nd snapshot start -->
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="circle-title2">
+                    <div class="circle-title-heading">
+                        <i class="fa fa-bolt fa-3x"></i>
+                    </div>
+                    <div class="box2">
+                        <div class="box-heading text-faded" style="font-weight: 700;">Instantaneous Voltage</div>
+                        <div class="box-heading text-faded">
+                            <small>
+                                <span style="color: red">R Phase :</span> {{liveData.r_volt}}<br>
+                                <span style="color: yellow">Y Phase :</span> {{liveData.y_volt}}<br>
+                                <span style="color: skyblue">B Phase :</span> {{liveData.b_volt}}<br>
+                            </small>
+                        </div>
+
+                        <!--  <a du-smooth-scroll="table" du-scrollspy class="footer">More Info<i
+                                class="fa fa-chevron-circle-right"></i></a> -->
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- 2nd snapshot end -->
+
+            <!-- 3rd snapshot start -->
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="circle-title2">
+                    <div class="circle-title-heading">
+                        <img id="img-ctn" src="/assets/image/energy.png" width="45">
+                    </div>
+                    <div class="box2">
+                        <div class="box-heading text-faded" style="font-weight: 700;">Instantaneous Load</div>
+
+                        <div class="box-number text-faded">{{liveData.totalLoad}} KW</div>
+
+                        <!-- <a du-smooth-scroll="table" du-scrollspy class="footer">More Info<i
+                                class="fa fa-chevron-circle-right"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            <!-- 3rd snapshot end -->
+
+            <!-- 4th snapshot start -->
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="circle-title2">
+                    <div class="circle-title-heading">
+                        <img id="img-ctn" src="/assets/image/low.png" width="45">
+                    </div>
+                    <div class="box2">
+                        <div class="box-heading text-faded" style="font-weight: 700;">Instantaneous Current</div>
+                        <div class="box-heading text-faded">
+                            <small>
+                                <span style="color: red">R Phase :</span> {{liveData.r_current}} Amp<br>
+                                <span style="color: yellow">Y Phase :</span> {{liveData.y_current}} Amp<br>
+                                <span style="color: skyblue">B Phase :</span> {{liveData.b_current}} Amp
+                            </small>
+                        </div>
+
+                        <!--  <a du-smooth-scroll="table" du-scrollspy class="footer">More Info<i
+                                class="fa fa-chevron-circle-right"></i></a> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" *ngIf="pf_visible">
+            <div class="dashboard_trakcer">Live Data</div>
+            <hr>
+
+            <!-- 1st snapshot start -->
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="circle-title2">
+                    <div class="circle-title-heading">
+                        <!-- <i class="fa fa-bell fa-fw fa-3x"></i> -->
+                        <img id="img-ctn" src="assets/image/consume.png" width="45">
+                    </div>
+                    <div class="box2">
+                        <div class="box-heading text-faded" style="font-weight: 700;">Mains or DG</div>
+
+                        <div class="box-number text-faded">{{ liveData.supply_source }}</div>
+                        <!-- <div class="box-number text-faded">{{ supply_source}}</div> -->
+
+                        <!--<a du-smooth-scroll="table" du-scrollspy class="footer">More Info<i
+                                class="fa fa-chevron-circle-right"></i></a> -->
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- 1st snapshot end -->
+
+
+            <!-- 2nd snapshot start -->
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="circle-title2">
+                    <div class="circle-title-heading">
+                        <i class="fa fa-bolt fa-3x"></i>
+                    </div>
+                    <div class="box2">
+                        <div class="box-heading text-faded" style="font-weight: 700;">Instantaneous Volt/Current</div>
+                        <div class="box-heading text-faded">
+                            <small>
+                                <span style="color: red">R Phase :</span> {{liveData.r_volt}} V / {{liveData.r_current}}
+                                amp <br>
+                                <span style="color: yellow">Y Phase :</span> {{liveData.y_volt}} V /
+                                {{liveData.y_current}} amp<br>
+                                <span style="color: skyblue">B Phase :</span> {{liveData.b_volt}} V /
+                                {{liveData.b_current}} amp <br>
+                            </small>
+                        </div>
+
+                        <!--  <a du-smooth-scroll="table" du-scrollspy class="footer">More Info<i
+                                class="fa fa-chevron-circle-right"></i></a> -->
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- 2nd snapshot end -->
+
+            <!-- 3rd snapshot start -->
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="circle-title2">
+                    <div class="circle-title-heading">
+                        <img id="img-ctn" src="/assets/image/energy.png" width="45">
+                    </div>
+                    <div class="box2" style="cursor: pointer;" (click)="loadDetails()">
+                        <div class="box-heading text-faded" style="font-weight: 700;">Instantaneous Load</div>
+
+                        <div class="box-number1 text-faded">
+                            <small>
+                                <span style="color: #ff7a01;">CURRENT LOAD :</span> {{liveData.totalLoad}} KW<br>
+                                <span style="color: red">MAXIMUM LOAD :</span> {{liveData.max_load}} KW <br>
+                                <span style="color: #37d837">MINIMUM LOAD :</span> {{liveData.min_load}} KW
+                            </small>
+                        </div>
+
+
+                        <!-- <a du-smooth-scroll="table" du-scrollspy class="footer">More Info<i
+                                class="fa fa-chevron-circle-right"></i></a> -->
+                    </div>
+                </div>
+            </div>
+            <!-- 3rd snapshot end -->
+
+            <!-- 4th snapshot start -->
+            <div class="col-lg-3 col-sm-6 col-xs-6">
+                <div class="circle-title2">
+                    <div class="circle-title-heading">
+                        <img id="img-ctn" src="/assets/image/low.png" width="45">
+                    </div>
+                    <div class="box2" style="cursor: pointer;" (click)="pf_details()">
+                        <div class="box-heading text-faded" style="font-weight: 700;">Instantaneous PF</div>
+                        <div class="box-heading text-faded">
+                            <small>
+                                <span style="color: red">R Phase :</span> {{liveData.r_pf}} <br>
+                                <span style="color: yellow">Y Phase :</span> {{liveData.y_pf}} <br>
+                                <span style="color: skyblue">B Phase :</span> {{liveData.b_pf}} <br>
+                            </small>
+                        </div>
+
+                        <!--  <a du-smooth-scroll="table" du-scrollspy class="footer">More Info<i
+                                class="fa fa-chevron-circle-right"></i></a> -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--power-status and customer power-status start-->
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o"></i> Monthly Power Source Distribution
+                    <div class="col-md-3 ">
+                    </div>
+                </div>
+                <div class="status-panel-body" style="height:291px">
+                    <app-highcharts [options]="pieChartOptions" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+
+
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o"></i> Site Details
+                </div>
+                <div class="panel-body details">
+                    <ul class="all-details">
+                        <li>
+                            <p>Site ID : </p>
+                        </li>
+                        <li>{{ siteDetails.site_id  }}</li>
+                    </ul>
+                    <ul class="all-details">
+                        <li>
+                            <p>Site Name : </p>
+                        </li>
+                        <li> {{siteDetails.site_name }}</li>
+                    </ul>
+
+                    <ul class="all-details">
+                        <li>
+                            <p>Address : </p>
+                        </li>
+                        <li> {{ siteDetails.site_addr }}</li>
+                    </ul>
+                    <ul class="all-details">
+                        <li>
+                            <p>Site Type : </p>
+                        </li>
+                        <li> {{siteDetails.site_type }} </li>
+                    </ul>
+                    <ul class="all-details">
+                        <li>
+                            <p>Site Manager : </p>
+                        </li>
+                        <li> {{ siteDetails.site_mgr_name }} </li>
+                    </ul>
+                    <ul class="all-details">
+                        <li>
+                            <p> Site Manager Email : </p>
+                        </li>
+                        <li>{{ siteDetails.site_mgr_email }}</li>
+                    </ul>
+                    <ul class="all-details">
+                        <li>
+                            <p> Site Manager Contact : </p>
+                        </li>
+                        <li> {{ siteDetails.site_mgr_mob}}</li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <br>
+        <!--chart start-->
+        <div class="row">
+            <!-- fuel consumption graph-->
+            <div class="col-sm-12 " *ngIf="showFuelGraph">
+                <div class="heading-panel">
+                    <div class="row">
+                        <div class="col-md-8" style="margin-top: 20px;">
+                            DG Fuel Consumption Graph
+                        </div>
+                        <div class="col-md-2">
+                            <mat-form-field appearance="outline">
+                                <input matInput [max]="maxDate" [min]="dgfuelMinDate" [matDatepicker]="picker2"
+                                    [formControl]="dgFuelDate" [value]="dgFuelDate.value"
+                                    (dateChange)="dgFuelConsumptionGraphSelectionChange()">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="button2" type="button" style="cursor: pointer;"
+                                (click)="customRangePopup()">Custom Range</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-body" *ngIf="dgFuelData">
+                    <app-highcharts [options]="dgFuelConsumptionOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4">
+
+                            <button class="md-raised md-primary md-button md-link-ripple" id="exceldata" type="button"
+                                style="float: right;" (click)="exportDgFuelExcelData()">
+                                <span class="ng-scope">Export Excel</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="chart-body" *ngIf="dgFuelDataSelectionChange">
+                    <app-highcharts [options]="dgFuelConsumptionSelectionOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4">
+
+                            <button class="md-raised md-primary md-button md-link-ripple" id="exceldata" type="button"
+                                style="float: right;" (click)="exportDgFuelExcelData()">
+                                <span class="ng-scope">Export Excel</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-12 " *ngIf="chartLoading">
+                <!-- <div class="col-md-12 col-sm-12"> -->
+                <div class="heading-panel">
+                    <div class="row">
+                        <div class="col-md-8" style="margin-top: 20px;">
+                            <i class="fa fa-bar-chart-o"></i>Total load-graph
+                        </div>
+                        <div class="col-md-2">
+                            <mat-form-field appearance="outline">
+                                <input matInput [max]="maxDate" [min]="minDate" [matDatepicker]="picker1"
+                                    [formControl]="loadDate" [value]="loadDate.value"
+                                    (dateChange)="loadGraphFilterChanged()">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="showLoadIntervalOptions; then thenTemplate else elseTemplate"></div>
+                        <ng-template #thenTemplate>
+                            <div class="col-md-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-select [(value)]="selected_load_options"
+                                        (selectionChange)="loadGraphFilterChanged()">
+                                        <mat-option *ngFor="let interval of loadGraphintervals"
+                                            [value]="interval.value">
+                                            {{interval.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </ng-template>
+                        <ng-template #elseTemplate>
+                            <div class="col-md-2"></div>
+                        </ng-template>
+
+                    </div>
+
+                    <!-- <i class="fa fa-bar-chart-o"></i> Trend Overview -->
+                </div>
+
+                <div class="chart-body" *ngIf="loadGraph">
+
+                    <app-highcharts #loadChart [options]="lineChartOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" [isOneToOne]="true" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4">
+
+                            <button class="md-raised md-primary md-button md-link-ripple" id="exceldata" type="button"
+                                style="float: right;" (click)="exportLoadData()">
+                                <span class="ng-scope">Export Excel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-body" *ngIf="seprateManinsDgLoad">
+
+                    <app-highcharts [options]="seprateManinsDgLoadChartOptions" [modules]="hcModules" [constructorType]="stockChart" [updateFlag]="chartUpdateFlag" [isOneToOne]="true" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4">
+
+                            <button class="md-raised md-primary md-button md-link-ripple" id="exceldata" type="button"
+                                style="float: right;" (click)="exportLoadData()">
+                                <span class="ng-scope">Export Excel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div>                -->
+            </div>
+            <div class="col-sm-12" *ngIf="showFuelGraph">
+                <div>
+                    <div class="heading-panel">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <i class="fa fa-bar-chart-o"></i>Monthly Trend Overview
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="chart-body">
+
+                    <app-highcharts [options]="lineChartOption" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-sm-12 ">
+                <div class="heading-panel">
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <i class="fa fa-bar-chart-o"></i>Total <mat-form-field
+                                style="max-width: 34%; font-size: 16px">
+                                <mat-select [(value)]="selected_graph" #energyValue
+                                    (selectionChange)="columnGraphFilterChanged($event)">
+                                    <mat-option *ngFor="let graphType of graphTypes" [value]="graphType.value">
+                                        {{graphType.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <mat-form-field appearance="outline">
+                                <input matInput [max]="maxDate" [min]="minDate" [matDatepicker]="picker1"
+                                    [formControl]="date" [value]="date.value" (dateChange)="columnGraphFilterChanged()">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="showIntervalOptions; then thenTemplate else elseTemplate"></div>
+                        <ng-template #thenTemplate>
+                            <div class="col-md-2">
+                                <mat-form-field appearance="outline">
+                                    <mat-select [(value)]="selected_task"
+                                        (selectionChange)="columnGraphFilterChanged()">
+                                        <mat-option *ngFor="let interval of intervals" [value]="interval.value">
+                                            {{interval.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </ng-template>
+                        <ng-template #elseTemplate>
+                            <div class="col-md-2"></div>
+                        </ng-template>
+
+
+
+                    </div>
+                </div>
+                <div class="chart-body" *ngIf="unitConsumptionGraph">
+                    <app-highcharts [options]="barChartOptions" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4"><button class="md-raised md-primary md-button md-link-ripple" type="button"
+                                style="float: right;" (click)="changeGraphStacking()">
+                                <span class="ng-scope">Change Graph</span>
+                            </button>
+
+                            <button class="md-raised md-primary md-button md-link-ripple" id="exceldata" type="button"
+                                style="float: right;" (click)="exportExcelData()">
+                                <span class="ng-scope">Export Excel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-body" *ngIf="runTimeGraph">
+                    <app-highcharts [options]="barChartOptionsRunTime" [modules]="hcModules" [constructorType]="chartConstructor" [updateFlag]="chartUpdateFlag" [isOneToOne]="oneToOneFlag" style="width: 100%; height: 100%; display: block;"></app-highcharts>
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4">
+                            <button class="md-raised md-primary md-button md-link-ripple" type="button"
+                                style="float: right;" (click)="changeGraphStackingRunTime()">
+                                <span class="ng-scope">Change Graph</span>
+                            </button>
+                            <button class="md-raised md-primary md-button md-link-ripple" id="exceldata" type="button"
+                                style="float: right;" (click)="exportExcelData()">
+                                <span class="ng-scope">Export Excel</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
